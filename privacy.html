@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — The Shortlist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F5F2EA;
+    --ink:#1E2A26;
+    --gold:#B9862F;
+    --teal:#33635A;
+    --line:#D9D2C0;
+    --card:#FFFFFF;
+    --muted:#6B675C;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.5;
+  }
+  h1,h2,h3,.serif{ font-family:'Fraunces', serif; }
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:1100px; margin:0 auto; padding:0 24px; }
+
+  /* Header */
+  header{
+    border-bottom:1px solid var(--line);
+    padding:22px 0;
+  }
+  header .wrap{ display:flex; justify-content:space-between; align-items:center; }
+  .logo{ font-size:22px; font-weight:600; letter-spacing:-0.01em; }
+  .logo span{ color:var(--gold); }
+  nav{ display:flex; gap:28px; font-size:14px; color:var(--muted); }
+  nav a:hover{ color:var(--ink); }
+
+  /* Hero */
+  .hero{ padding:64px 0 48px; border-bottom:1px solid var(--line); }
+  .hero-grid{ display:grid; grid-template-columns:1.3fr 1fr; gap:48px; align-items:end; }
+  .hero h1{ font-size:52px; font-weight:600; line-height:1.05; letter-spacing:-0.015em; }
+  .hero p.lede{ margin-top:18px; font-size:17px; color:var(--muted); max-width:46ch; }
+  .hero-note{
+    border-left:2px solid var(--gold);
+    padding-left:18px;
+    font-size:14px;
+    color:var(--muted);
+  }
+  .hero-note b{ color:var(--ink); display:block; margin-bottom:4px; font-weight:600;}
+
+  /* Section headings */
+  .section-head{
+    display:flex; justify-content:space-between; align-items:baseline;
+    margin:56px 0 24px;
+  }
+  .section-head h2{ font-size:26px; font-weight:600; }
+  .section-head .count{ font-size:13px; color:var(--muted); }
+
+  /* Pick cards */
+  .picks{ display:grid; grid-template-columns:repeat(3, 1fr); gap:22px; }
+  .pick-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    padding:22px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+  .pick-rank{ font-size:13px; color:var(--gold); font-weight:600; }
+  .pick-card h3{ font-size:19px; font-weight:600; }
+  .pick-card .why{ font-size:14px; color:var(--muted); flex-grow:1; }
+  .stars{ font-size:14px; color:var(--gold); letter-spacing:2px; }
+  .pick-footer{
+    display:flex; justify-content:space-between; align-items:center;
+    padding-top:10px; border-top:1px solid var(--line);
+  }
+  .price{ font-weight:600; }
+  .cta-btn{
+    background:var(--teal); color:#fff; font-size:13px; font-weight:500;
+    padding:9px 16px; border:none; cursor:pointer;
+  }
+  .cta-btn:hover{ background:#274c45; }
+
+  /* Comparison table */
+  .compare-table{ width:100%; border-collapse:collapse; font-size:14px; }
+  .compare-table th, .compare-table td{
+    text-align:left; padding:14px 12px; border-bottom:1px solid var(--line);
+  }
+  .compare-table th{ color:var(--muted); font-weight:500; font-size:12.5px; }
+  .compare-table td.name{ font-weight:600; }
+  .compare-table .tag{
+    display:inline-block; font-size:11.5px; background:var(--paper);
+    border:1px solid var(--line); padding:2px 8px; color:var(--muted);
+  }
+
+  /* Categories */
+  .cats{ display:grid; grid-template-columns:repeat(4, 1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+  .cat{ background:var(--card); padding:26px 22px; }
+  .cat h3{ font-size:17px; font-weight:600; margin-bottom:6px; }
+  .cat p{ font-size:13.5px; color:var(--muted); }
+
+  /* Disclosure */
+  .disclosure{
+    margin-top:64px; padding:20px 0; border-top:1px solid var(--line);
+    font-size:13px; color:var(--muted); max-width:70ch;
+  }
+
+  footer{
+    margin-top:56px; border-top:1px solid var(--line);
+    padding:28px 0; font-size:13px; color:var(--muted);
+  }
+  footer .wrap{ display:flex; justify-content:space-between; }
+
+  @media (max-width:800px){
+    .hero-grid{ grid-template-columns:1fr; }
+    .hero h1{ font-size:36px; }
+    .picks{ grid-template-columns:1fr; }
+    .cats{ grid-template-columns:1fr 1fr; }
+    nav{ display:none; }
+    .compare-table{ display:block; overflow-x:auto; white-space:nowrap; }
+  }
+
+  /* Prose pages */
+  .page{ padding:56px 0 40px; max-width:750px; }
+  .page h1{ font-size:38px; font-weight:600; margin-bottom:18px; }
+  .page h2{ font-size:19px; font-weight:600; margin-top:32px; margin-bottom:10px; }
+  .page p{ color:var(--muted); font-size:15px; margin-top:10px; }
+  .page ul{ color:var(--muted); font-size:15px; margin-top:10px; padding-left:20px; }
+  .page li{ margin-top:6px; }
+  .page .updated{ font-size:13px; color:var(--muted); margin-bottom:28px; }
+  .back-link{ display:inline-block; margin-top:40px; font-size:14px; color:var(--teal); font-weight:500; }
+</style>
+
+<div class="wrap page">
+  <h1>Privacy Policy</h1>
+  <p class="updated">Last updated: September 2026</p>
+  <p>This Privacy Policy explains how The Shortlist ("we", "us") collects and uses information when you visit this website.</p>
+  <h2>Information we collect</h2>
+  <p>We may automatically collect standard technical information such as your browser type, device type, pages visited, and time spent on the site, through cookies and similar tools such as Google Analytics.</p>
+  <h2>Cookies</h2>
+  <p>Cookies are small files stored on your device. We use them to understand how visitors use the site and to support advertising services such as Google AdSense, which may use cookies to serve ads based on your prior visits to this or other websites.</p>
+  <h2>Third-party services</h2>
+  <p>We may use third-party services including Google AdSense, Google Analytics, and affiliate programs (such as Amazon Associates). These services may collect data according to their own privacy policies. You can learn more about Google's use of data at <strong>policies.google.com/technologies/partner-sites</strong>.</p>
+  <h2>Your choices</h2>
+  <p>You can disable cookies through your browser settings at any time. Doing so may affect how parts of the site function.</p>
+  <h2>Contact</h2>
+  <p>If you have questions about this policy, reach out via our <a href="contact.html" style="color:var(--teal); font-weight:500;">Contact page</a>.</p>
+  <a class="back-link" href="index.html">← Back to Home</a>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 The Shortlist</span>
+    <span><a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy Policy</a> · <a href="disclosure.html">Affiliate Disclosure</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

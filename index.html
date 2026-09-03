@@ -1,0 +1,273 @@
+<!--
+  SETUP GUIDE (GitHub Pages pe kaise daalein — free hosting)
+  1. GitHub pe naya repository banao — naam de do "myshortlist" (ya jo bhi pasand ho).
+  2. Ye index.html file us repository mein upload kar do (drag & drop se ho jata hai GitHub website pe).
+  3. Repository ke Settings > Pages mein jao, "Branch" mein main select karo, Save karo.
+  4. 1-2 minute mein site live ho jayegi: https://yourusername.github.io/myshortlist/
+
+  CUSTOMIZE KARNE KE LIYE
+  - Product names, prices, "why" text: har pick-card aur table row mein placeholder hai, apne products se replace karo.
+  - Affiliate links: har href="#" ko apne Amazon affiliate link se replace karo.
+  - Categories: cats section mein apne niche ke hisaab se 4 categories daal do.
+
+  AGLA STEP
+  AdSense/affiliate approval ke liye 4 extra pages chahiye: About Us, Contact Us, Privacy Policy, Affiliate Disclosure — bata do to bana deta hoon.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Shortlist — Honest Product Picks</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F5F2EA;
+    --ink:#1E2A26;
+    --gold:#B9862F;
+    --teal:#33635A;
+    --line:#D9D2C0;
+    --card:#FFFFFF;
+    --muted:#6B675C;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.5;
+  }
+  h1,h2,h3,.serif{ font-family:'Fraunces', serif; }
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:1100px; margin:0 auto; padding:0 24px; }
+
+  /* Header */
+  header{
+    border-bottom:1px solid var(--line);
+    padding:22px 0;
+  }
+  header .wrap{ display:flex; justify-content:space-between; align-items:center; }
+  .logo{ font-size:22px; font-weight:600; letter-spacing:-0.01em; }
+  .logo span{ color:var(--gold); }
+  nav{ display:flex; gap:28px; font-size:14px; color:var(--muted); }
+  nav a:hover{ color:var(--ink); }
+
+  /* Hero */
+  .hero{ padding:64px 0 48px; border-bottom:1px solid var(--line); }
+  .hero-grid{ display:grid; grid-template-columns:1.3fr 1fr; gap:48px; align-items:end; }
+  .hero h1{ font-size:52px; font-weight:600; line-height:1.05; letter-spacing:-0.015em; }
+  .hero p.lede{ margin-top:18px; font-size:17px; color:var(--muted); max-width:46ch; }
+  .hero-note{
+    border-left:2px solid var(--gold);
+    padding-left:18px;
+    font-size:14px;
+    color:var(--muted);
+  }
+  .hero-note b{ color:var(--ink); display:block; margin-bottom:4px; font-weight:600;}
+
+  /* Section headings */
+  .section-head{
+    display:flex; justify-content:space-between; align-items:baseline;
+    margin:56px 0 24px;
+  }
+  .section-head h2{ font-size:26px; font-weight:600; }
+  .section-head .count{ font-size:13px; color:var(--muted); }
+
+  /* Pick cards */
+  .picks{ display:grid; grid-template-columns:repeat(3, 1fr); gap:22px; }
+  .pick-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    padding:22px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+  .pick-rank{ font-size:13px; color:var(--gold); font-weight:600; }
+  .pick-card h3{ font-size:19px; font-weight:600; }
+  .pick-card .why{ font-size:14px; color:var(--muted); flex-grow:1; }
+  .stars{ font-size:14px; color:var(--gold); letter-spacing:2px; }
+  .pick-footer{
+    display:flex; justify-content:space-between; align-items:center;
+    padding-top:10px; border-top:1px solid var(--line);
+  }
+  .price{ font-weight:600; }
+  .cta-btn{
+    background:var(--teal); color:#fff; font-size:13px; font-weight:500;
+    padding:9px 16px; border:none; cursor:pointer;
+  }
+  .cta-btn:hover{ background:#274c45; }
+
+  /* Comparison table */
+  .compare-table{ width:100%; border-collapse:collapse; font-size:14px; }
+  .compare-table th, .compare-table td{
+    text-align:left; padding:14px 12px; border-bottom:1px solid var(--line);
+  }
+  .compare-table th{ color:var(--muted); font-weight:500; font-size:12.5px; }
+  .compare-table td.name{ font-weight:600; }
+  .compare-table .tag{
+    display:inline-block; font-size:11.5px; background:var(--paper);
+    border:1px solid var(--line); padding:2px 8px; color:var(--muted);
+  }
+
+  /* Categories */
+  .cats{ display:grid; grid-template-columns:repeat(4, 1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+  .cat{ background:var(--card); padding:26px 22px; }
+  .cat h3{ font-size:17px; font-weight:600; margin-bottom:6px; }
+  .cat p{ font-size:13.5px; color:var(--muted); }
+
+  /* Disclosure */
+  .disclosure{
+    margin-top:64px; padding:20px 0; border-top:1px solid var(--line);
+    font-size:13px; color:var(--muted); max-width:70ch;
+  }
+
+  footer{
+    margin-top:56px; border-top:1px solid var(--line);
+    padding:28px 0; font-size:13px; color:var(--muted);
+  }
+  footer .wrap{ display:flex; justify-content:space-between; }
+
+  @media (max-width:800px){
+    .hero-grid{ grid-template-columns:1fr; }
+    .hero h1{ font-size:36px; }
+    .picks{ grid-template-columns:1fr; }
+    .cats{ grid-template-columns:1fr 1fr; }
+    nav{ display:none; }
+    .compare-table{ display:block; overflow-x:auto; white-space:nowrap; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="logo">The <span>Shortlist</span></div>
+    <nav>
+      <a href="#picks">This Week's Picks</a>
+      <a href="#compare">Compare</a>
+      <a href="#categories">Categories</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>We buy it, break it&nbsp;in, and tell you if it's worth your money.</h1>
+      <p class="lede">Every pick on this site is chosen against three or more competitors before it earns a place here — no sponsored placements, no filler reviews.</p>
+    </div>
+    <div class="hero-note">
+      <b>How we test</b>
+      Each category page compares price, durability, and real-world use across at least 3 alternatives before we name a winner.
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <div class="section-head" id="picks">
+    <h2>This Week's Picks</h2>
+    <div class="count">3 of 40+ products reviewed</div>
+  </div>
+
+  <div class="picks">
+    <div class="pick-card">
+      <div class="pick-rank">Best Overall</div>
+      <h3>Product Name One</h3>
+      <div class="stars">★★★★★</div>
+      <p class="why">Replace with your product's standout reason — one clear sentence on why it beat the rest.</p>
+      <div class="pick-footer">
+        <span class="price">$00.00</span>
+        <a href="#" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <div class="pick-rank">Best Budget</div>
+      <h3>Product Name Two</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">Replace with why this is the best pick for people on a tighter budget.</p>
+      <div class="pick-footer">
+        <span class="price">$00.00</span>
+        <a href="#" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <div class="pick-rank">Best Upgrade</div>
+      <h3>Product Name Three</h3>
+      <div class="stars">★★★★★</div>
+      <p class="why">Replace with why this is worth the extra spend for the right buyer.</p>
+      <div class="pick-footer">
+        <span class="price">$00.00</span>
+        <a href="#" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-head" id="compare">
+    <h2>Head-to-Head</h2>
+    <div class="count">Updated Sep 2026</div>
+  </div>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Best for</th>
+        <th>Rating</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name">Product Name One</td>
+        <td>$00.00</td>
+        <td><span class="tag">Overall pick</span></td>
+        <td>4.8/5</td>
+        <td><a href="#">View →</a></td>
+      </tr>
+      <tr>
+        <td class="name">Product Name Two</td>
+        <td>$00.00</td>
+        <td><span class="tag">Budget</span></td>
+        <td>4.4/5</td>
+        <td><a href="#">View →</a></td>
+      </tr>
+      <tr>
+        <td class="name">Product Name Three</td>
+        <td>$00.00</td>
+        <td><span class="tag">Premium</span></td>
+        <td>4.7/5</td>
+        <td><a href="#">View →</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="section-head" id="categories">
+    <h2>Browse by Category</h2>
+  </div>
+
+  <div class="cats">
+    <div class="cat"><h3>Home & Kitchen</h3><p>Everyday gear worth the counter space.</p></div>
+    <div class="cat"><h3>Tech & Gadgets</h3><p>What's actually useful, not just new.</p></div>
+    <div class="cat"><h3>Fitness</h3><p>Equipment that survives past January.</p></div>
+    <div class="cat"><h3>Work & Study</h3><p>Desk setups and tools that pay for themselves.</p></div>
+  </div>
+
+  <p class="disclosure">
+    Disclosure: The Shortlist may earn a commission when you buy through links on this site — this does not affect which products we choose to feature or how we rate them. See our full Affiliate Disclosure page for details.
+  </p>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 The Shortlist</span>
+    <span><a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy Policy</a> · <a href="disclosure.html">Affiliate Disclosure</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
