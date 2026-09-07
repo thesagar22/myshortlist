@@ -167,7 +167,119 @@
   </div>
 </section>
 
-<div class="wrap">
+html
+
+<!-- ========================================== -->
+<!-- MODERN INFINITE PRODUCT SLIDER SECTION -->
+<!-- ========================================== -->
+<div class="product-marquee-container">
+    <div class="product-marquee-track">
+        <!-- Slide Item 1 -->
+        <div class="marquee-item">
+            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300" alt="Premium Headphones">
+            <h4>Premium Headphones</h4>
+            <span class="badge">Hot Deal</span>
+        </div>
+        <!-- Slide Item 2 -->
+        <div class="marquee-item">
+            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300" alt="Smart Watch Pro">
+            <h4>Smart Watch Pro</h4>
+            <span class="badge">Best Seller</span>
+        </div>
+        <!-- Slide Item 3 -->
+        <div class="marquee-item">
+            <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=300" alt="Stylish Sunglasses">
+            <h4>Stylish Sunglasses</h4>
+            <span class="badge">Trending</span>
+        </div>
+        <!-- Slide Item 4 -->
+        <div class="marquee-item">
+            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300" alt="Sports Sneakers">
+            <h4>Sports Sneakers</h4>
+            <span class="badge">New Arrival</span>
+        </div>
+        <!-- Duplicated Items for Seamless Infinite Loop Scroll -->
+        <div class="marquee-item"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300" alt="Premium Headphones"><h4>Premium Headphones</h4><span class="badge">Hot Deal</span></div>
+        <div class="marquee-item"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300" alt="Smart Watch Pro"><h4>Smart Watch Pro</h4><span class="badge">Best Seller</span></div>
+        <div class="marquee-item"><img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=300" alt="Stylish Sunglasses"><h4>Stylish Sunglasses</h4><span class="badge">Trending</span></div>
+        <div class="marquee-item"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300" alt="Sports Sneakers"><h4>Sports Sneakers</h4><span class="badge">New Arrival</span></div>
+    </div>
+</div>
+
+<!-- ========================================== -->
+<!-- SLIDER STYLING (CSS) -->
+<!-- ========================================== -->
+<style>
+.product-marquee-container {
+    overflow: hidden;
+    width: 100%;
+    background-color: #fcfbf7; /* Matches your light cream background theme */
+    padding: 30px 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eae7dc;
+}
+
+.product-marquee-track {
+    display: flex;
+    width: calc(260px * 8); /* Dynamic width calculation for all 8 items */
+    animation: scrollInfinite 25s linear infinite;
+}
+
+/* Pauses the slider movement seamlessly when user moves mouse over it */
+.product-marquee-track:hover {
+    animation-play-state: paused;
+}
+
+.marquee-item {
+    width: 220px;
+    margin: 0 20px;
+    text-align: center;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eae7dc;
+    transition: transform 0.3s ease;
+}
+
+.marquee-item:hover {
+    transform: translateY(-5px);
+}
+
+.marquee-item img {
+    width: 100%;
+    height: 160px;
+    object-fit: cubic-bezier;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+
+.marquee-item h4 {
+    font-size: 1rem;
+    color: #1a1a1a;
+    margin: 8px 0;
+    font-family: inherit;
+}
+
+.marquee-item .badge {
+    display: inline-block;
+    background-color: #e85a4f; /* Modern accent red color */
+    color: white;
+    padding: 4px 10px;
+    font-size: 0.75rem;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+/* Keyframes Animation for continuous smooth sliding movement */
+@keyframes scrollInfinite {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-260px * 4)); } /* Moves exactly half the total track length */
+}
+</style>
+
+Use code with caution.
+  <div class="wrap">
 
   <div class="section-head" id="picks">
     <h2>This Week's Picks</h2>
