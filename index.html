@@ -139,6 +139,12 @@
     nav{ display:none; }
     .compare-table{ display:block; overflow-x:auto; white-space:nowrap; }
   }
+  .product-marquee-container{ overflow:hidden; padding:20px 0; margin:20px auto 0; max-width:1100px; }
+.product-marquee-track{ display:flex; gap:20px; width:max-content; animation:scrollInfinite 35s linear infinite; }
+.marquee-item{ flex:0 0 auto; width:140px; text-align:center; }
+.marquee-item img{ width:140px; height:140px; object-fit:contain; border-radius:8px; background:#fff; border:1px solid var(--line); display:block; }
+.marquee-item h4{ font-size:13px; margin-top:8px; font-weight:600; }
+@keyframes scrollInfinite{ 0%{ transform:translateX(0); } 100%{ transform:translateX(-50%); } }
 </style>
 </head>
 <body>
