@@ -621,6 +621,45 @@ function filterProducts(){
     card.style.display = title.includes(input) ? '' : 'none';
   });
 }
+  var faq = [
+  { keywords: ["delivery", "shipping", "kitna time"], reply: "Delivery generally 15-25 din mein ho jati hai kyunke products AliExpress se aate hain." },
+  { keywords: ["return", "wapas", "refund"], reply: "Return/refund policy AliExpress ya Amazon ki apni policy ke hisaab se hoti hai — jahan se aap order karte hain." },
+  { keywords: ["payment", "cod", "cash on delivery"], reply: "Payment options seller (AliExpress/Amazon) ki website par depend karte hain." },
+  { keywords: ["commission", "sponsored", "fake"], reply: "Hum affiliate links use karte hain jisse humein chhota commission milta hai — aapko koi extra paisa nahi lagta." },
+  { keywords: ["contact", "email", "phone"], reply: "Aap humein Contact page ke through message kar sakte hain." }
+];
+
+function toggleChat(){
+  document.getElementById('chatBox').classList.toggle('open');
+  var msgBox = document.getElementById('chatMessages');
+  if(msgBox.children.length === 0){
+    addChatMsg("Hi! Ask me about delivery, returns, payment, or anything else.", "bot");
+  }
+}
+
+function addChatMsg(text, sender){
+  var msgBox = document.getElementById('chatMessages');
+  var div = document.createElement('div');
+  div.className = 'chatMsg ' + sender;
+  div.textContent = text;
+  msgBox.appendChild(div);
+  msgBox.scrollTop = msgBox.scrollHeight;
+}
+
+function sendChat(){
+  var input = document.getElementById('chatInput');
+  var text = input.value.trim();
+  if(!text) return;
+  addChatMsg(text, "user");
+  input.value = "";
+  setTimeout(function(){
+    var lower = text.toLowerCase();
+    var matched = faq.find(function(item){
+      return item.keywords.some(function(k){ return lower.includes(k); });
+    });
+    addChatMsg(matched ? matched.reply : "Sorry, I don't have an answer for that yet — try asking about delivery, returns, or payment.", "bot");
+  }, 500);
+}
 </script>
 </body>
 </html>
