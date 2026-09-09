@@ -592,6 +592,15 @@
     <span><a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy Policy</a> · <a href="disclosure.html">Affiliate Disclosure</a></span>
   </div>
 </footer>
-
+<script>
+function filterProducts(){
+  var input = document.getElementById('siteSearch').value.toLowerCase();
+  var cards = document.querySelectorAll('.pick-card');
+  cards.forEach(function(card){
+    var title = card.querySelector('h3').textContent.toLowerCase();
+    card.style.display = title.includes(input) ? '' : 'none';
+  });
+}
+</script>
 </body>
 </html>
