@@ -603,6 +603,15 @@
     <span><a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy Policy</a> · <a href="disclosure.html">Affiliate Disclosure</a></span>
   </div>
 </footer>
+  <div id="chatBubble" onclick="toggleChat()">💬</div>
+<div id="chatBox">
+  <div id="chatHeader">Chat with us</div>
+  <div id="chatMessages"></div>
+  <div id="chatInputRow">
+    <input type="text" id="chatInput" placeholder="Type a message..." onkeydown="if(event.key==='Enter')sendChat()">
+    <button id="chatSend" onclick="sendChat()">➤</button>
+  </div>
+</div>
 <script>
 function filterProducts(){
   var input = document.getElementById('siteSearch').value.toLowerCase();
