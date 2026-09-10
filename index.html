@@ -636,6 +636,26 @@ function filterProducts(){
     card.style.display = title.includes(input) ? '' : 'none';
   });
 }
+  var currentPage = 0;
+var rowsPerPage = 10;
+
+function showPage(){
+  var rows = document.querySelectorAll('.compare-table tbody tr');
+  var totalPages = Math.ceil(rows.length / rowsPerPage);
+  rows.forEach(function(row, i){
+    row.style.display = (i >= currentPage * rowsPerPage && i < (currentPage + 1) * rowsPerPage) ? '' : 'none';
+  });
+  document.getElementById('pageInfo').textContent = 'Page ' + (currentPage + 1) + ' of ' + totalPages;
+  document.getElementById('prevPage').disabled = currentPage === 0;
+  document.getElementById('nextPage').disabled = currentPage === totalPages - 1;
+}
+
+function changePage(dir){
+  currentPage += dir;
+  showPage();
+}
+
+showPage();
   var faq = [
   { keywords: ["delivery", "shipping", "how long", "arrive"], reply: "Delivery usually takes 4-5 days after your order is confirmed." },
   { keywords: ["return", "refund", "exchange"], reply: "Returns and refunds follow the seller's policy (AliExpress or Amazon), since we link out to their store for the actual purchase." },
