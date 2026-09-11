@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Outdoor & Sports — The Shortlist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F5F2EA;
+    --ink:#1E2A26;
+    --gold:#B9862F;
+    --teal:#33635A;
+    --line:#D9D2C0;
+    --card:#FFFFFF;
+    --muted:#6B675C;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.5;
+  }
+  h1,h2,h3,.serif{ font-family:'Fraunces', serif; }
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:1300px; margin:0 auto; padding:0 24px; }
+  .pick-img{ width:100%; height:200px; object-fit:contain; border-radius:8px; margin-bottom:12px; display:block; background:#fff; }
+
+  header{ border-bottom:1px solid var(--line); padding:22px 0; }
+  header .wrap{ display:flex; justify-content:space-between; align-items:center; }
+  .logo{ font-size:22px; font-weight:600; letter-spacing:-0.01em; }
+  .logo img{ display:block; }
+  nav{ display:flex; gap:28px; font-size:14px; color:var(--muted); }
+  nav a:hover{ color:var(--ink); }
+
+  .page-hero{ padding:48px 0 32px; border-bottom:1px solid var(--line); }
+  .page-hero h1{ font-size:38px; font-weight:600; letter-spacing:-0.01em; }
+  .page-hero p{ margin-top:10px; font-size:16px; color:var(--muted); }
+  .breadcrumb{ font-size:13px; color:var(--muted); margin-bottom:14px; }
+  .breadcrumb a:hover{ color:var(--ink); text-decoration:underline; }
+
+  .section-head{ display:flex; justify-content:space-between; align-items:baseline; margin:40px 0 24px; }
+  .section-head .count{ font-size:13px; color:var(--muted); }
+
+  .picks{ display:grid; grid-template-columns:repeat(3, 1fr); gap:22px; margin-bottom:56px; }
+  .pick-card{ background:var(--card); border:1px solid var(--line); padding:22px; display:flex; flex-direction:column; gap:12px; }
+  .pick-rank{ font-size:13px; color:var(--gold); font-weight:600; }
+  .pick-card h3{ font-size:19px; font-weight:600; }
+  .pick-card .why{ font-size:14px; color:var(--muted); flex-grow:1; }
+  .stars{ font-size:14px; color:var(--gold); letter-spacing:2px; }
+  .pick-footer{ display:flex; justify-content:space-between; align-items:center; padding-top:10px; border-top:1px solid var(--line); }
+  .price{ font-weight:600; }
+  .cta-btn{ background:var(--teal); color:#fff; font-size:13px; font-weight:500; padding:9px 16px; border:none; cursor:pointer; }
+  .cta-btn:hover{ background:#274c45; }
+
+  footer{ margin-top:56px; border-top:1px solid var(--line); padding:28px 0; font-size:13px; color:var(--muted); }
+  footer .wrap{ display:flex; justify-content:space-between; }
+
+  #chatBubble{ position:fixed; bottom:20px; right:20px; width:56px; height:56px; border-radius:50%; background:#1b3a2f; color:#fff; display:flex; align-items:center; justify-content:center; font-size:26px; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,0.25); z-index:999; }
+  #chatBox{ position:fixed; bottom:88px; right:20px; width:300px; max-height:400px; background:#fff; border:1px solid var(--line); border-radius:10px; box-shadow:0 6px 20px rgba(0,0,0,0.2); display:none; flex-direction:column; z-index:999; overflow:hidden; }
+  #chatBox.open{ display:flex; }
+  #chatHeader{ background:#1b3a2f; color:#fff; padding:12px 14px; font-weight:600; font-size:14px; }
+  #chatMessages{ flex:1; padding:12px; overflow-y:auto; font-size:13.5px; }
+  .chatMsg{ margin-bottom:10px; padding:8px 10px; border-radius:8px; max-width:85%; line-height:1.4; }
+  .chatMsg.bot{ background:#f1efe8; align-self:flex-start; }
+  .chatMsg.user{ background:#1b3a2f; color:#fff; align-self:flex-end; margin-left:auto; }
+  #chatInputRow{ display:flex; border-top:1px solid var(--line); }
+  #chatInput{ flex:1; border:none; padding:10px; font-size:13.5px; outline:none; }
+  #chatSend{ background:#1b3a2f; color:#fff; border:none; padding:0 14px; cursor:pointer; }
+
+  @media (max-width:800px){
+    .picks{ grid-template-columns:1fr; }
+    nav{ display:none; }
+    .page-hero h1{ font-size:28px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="logo"><img src="logo.png" alt="The Shortlist" style="height:38px;"></div>
+    <nav>
+      <a href="index.html#picks">This Week's Picks</a>
+      <a href="index.html#compare">Compare</a>
+      <a href="index.html#categories">Categories</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="index.html">Home</a> / Outdoor & Sports</div>
+    <h1>Outdoor & Sports</h1>
+    <p>Equipment that survives past January.</p>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="section-head">
+    <div class="count">9 products in this category</div>
+  </div>
+
+  <div class="picks">
+    <div class="pick-card">
+      <img class="pick-img" src="https://m.media-amazon.com/images/W/BW_MEDIAX_AVIF_MEASUREMENT_1306696-T3/images/I/714JtW2kbdL._AC_SL1500_.jpg" alt="40oz Insulated Steel Water Bottle">
+      <div class="pick-rank">Amazon&#x27;s Choice</div>
+      <h3>40oz Insulated Steel Water Bottle</h3>
+      <div class="stars">★★★★★</div>
+      <p class="why">Leak-proof, BPA-free, and fits most car cup holders — a trusted pick for the gym, hiking, or travel.</p>
+      <div class="pick-footer">
+        <span class="price">$31.95</span>
+        <a href="https://amzn.to/46H7lw2" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/S1b8cb2b00a3b4d6895138d6469991696y.jpg_220x220q75.jpg_.avif" alt="Woven Non-Slip Beach Sandals">
+      <div class="pick-rank">Summer Pick</div>
+      <h3>Woven Non-Slip Beach Sandals</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">A round-toe woven design with a non-slip sole — built for comfort during beach trips and casual summer wear.</p>
+      <div class="pick-footer">
+        <span class="price">Rs. 5,001</span>
+        <a href="https://s.click.aliexpress.com/e/_c4sJbLFf" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/Sccd60437aec8430ebe2c09c38e8f0d4dq.jpg?has_lang=1&ver=2_220x220q75.jpg_.avif" alt="Philips LED Headlamp — Rechargeable Sensor Headlight">
+      <div class="pick-rank">52% OFF</div>
+      <h3>Philips LED Headlamp — Rechargeable Sensor Headlight</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">10 lighting modes, Type-C rechargeable, with a motion sensor — great for camping, fishing, and outdoor work.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 4,993.79</span>
+        <a href="https://s.click.aliexpress.com/e/_c3mmFueV" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/S90cd841c12264db6896deea48c6182eaw.jpg" alt="LIGE LED Flashlight Smart Watch">
+      <div class="pick-rank">Outdoor Pick</div>
+      <h3>LIGE LED Flashlight Smart Watch</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">Military-grade, waterproof, with BT calling — a rugged smartwatch for outdoor sports and health monitoring.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 7,068.42</span>
+        <a href="https://s.click.aliexpress.com/e/_c3QV80aH" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/S1ecff00caf814c809040bf6f54a30cd6B.jpg" alt="Ice Silk Cooling Arm Sleeves">
+      <div class="pick-rank">Sports Pick</div>
+      <h3>Ice Silk Cooling Arm Sleeves</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">UPF 50+ sun protection makes these great for outdoor sports or a daily commute in the sun.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 599.03</span>
+        <a href="https://s.click.aliexpress.com/e/_c37owJ0H" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/Sb555f0f3884741cd98489f64e46a1afeS.jpg" alt="Men&#x27;s Sports &amp; Casual Shoes">
+      <div class="pick-rank">Men&#x27;s Footwear</div>
+      <h3>Men&#x27;s Sports &amp; Casual Shoes</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">An outdoor-versatile, lightweight build that fits daily wear as easily as casual outings.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 9,608.36</span>
+        <a href="https://s.click.aliexpress.com/e/_c3a3KYHF" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/Seb5d2fce16d94de6be60dbe2409e1052o.jpg" alt="Skechers Men&#x27;s Running Shoes">
+      <div class="pick-rank">Premium Footwear</div>
+      <h3>Skechers Men&#x27;s Running Shoes</h3>
+      <div class="stars">★★★★★</div>
+      <p class="why">A lightweight, lace-up design — a comfortable pick for the gym, running, or daily wear from a trusted brand.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 29,283.95</span>
+        <a href="https://s.click.aliexpress.com/e/_c4Fsi0qz" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/S8305bc7d0dd64e6a844a348c472f5df9X.jpg" alt="Baofeng UV-21 PRO Walkie Talkie">
+      <div class="pick-rank">Outdoor Essential</div>
+      <h3>Baofeng UV-21 PRO Walkie Talkie</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">Multi-band with 999 channels and long range — a reliable radio for hiking, camping, or emergency communication.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 12,342.36</span>
+        <a href="https://s.click.aliexpress.com/e/_c3STnHf3" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/S00c8050653e74ca0adc442d0ab5a93d6P.png" alt="Motorcycle/Bicycle Selfie Stick Mount">
+      <div class="pick-rank">Action Cam Accessory</div>
+      <h3>Motorcycle/Bicycle Selfie Stick Mount</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">Compatible with Insta360, GoPro, and DJI — a handy mount for capturing riding vlogs or adventure footage.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 4,245.29</span>
+        <a href="https://s.click.aliexpress.com/e/_c3PVLid7" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 The Shortlist</span>
+    <span><a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy Policy</a> · <a href="disclosure.html">Affiliate Disclosure</a></span>
+  </div>
+</footer>
+
+<div id="chatBubble" onclick="toggleChat()">💬</div>
+<div id="chatBox">
+  <div id="chatHeader">Chat with us</div>
+  <div id="chatMessages"></div>
+  <div id="chatInputRow">
+    <input type="text" id="chatInput" placeholder="Type a message..." onkeydown="if(event.key==='Enter')sendChat()">
+    <button id="chatSend" onclick="sendChat()">➤</button>
+  </div>
+</div>
+<script>
+var faq = [
+  { keywords: ["delivery", "shipping", "how long", "arrive"], reply: "Delivery usually takes 4-5 days after your order is confirmed." },
+  { keywords: ["return", "refund", "exchange"], reply: "Returns and refunds follow the seller's policy (AliExpress or Amazon), since we link out to their store for the actual purchase." },
+  { keywords: ["payment", "cod", "cash on delivery", "pay"], reply: "Payment options depend on the seller's site — most support major cards and other standard checkout methods." },
+  { keywords: ["commission", "sponsored", "fake", "genuine", "real"], reply: "We use affiliate links, which means we may earn a small commission if you buy through them — at no extra cost to you. Every pick is still researched independently." },
+  { keywords: ["contact", "email", "phone", "reach"], reply: "You can reach us through the Contact page linked in the footer." },
+  { keywords: ["quality", "durable", "good"], reply: "We compare specs, price, and real buyer reviews before featuring any product, so quality is a key part of how picks are chosen." },
+  { keywords: ["about", "what is this", "who are you"], reply: "The Shortlist is a product-research site — we compare items across multiple options and link you to the best pick." }
+];
+function toggleChat(){
+  document.getElementById('chatBox').classList.toggle('open');
+  var msgBox = document.getElementById('chatMessages');
+  if(msgBox.children.length === 0){
+    addChatMsg("Hi! Ask me about delivery, returns, payment, or anything else.", "bot");
+  }
+}
+function addChatMsg(text, sender){
+  var msgBox = document.getElementById('chatMessages');
+  var div = document.createElement('div');
+  div.className = 'chatMsg ' + sender;
+  div.textContent = text;
+  msgBox.appendChild(div);
+  msgBox.scrollTop = msgBox.scrollHeight;
+}
+function sendChat(){
+  var input = document.getElementById('chatInput');
+  var text = input.value.trim();
+  if(!text) return;
+  addChatMsg(text, "user");
+  input.value = "";
+  setTimeout(function(){
+    var lower = text.toLowerCase();
+    var matched = faq.find(function(item){
+      return item.keywords.some(function(k){ return lower.includes(k); });
+    });
+    addChatMsg(matched ? matched.reply : "Sorry, I don't have an answer for that yet — try asking about delivery, returns, or payment.", "bot");
+  }, 500);
+}
+</script>
+</body>
+</html>
