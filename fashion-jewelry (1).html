@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fashion & Jewelry — The Shortlist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F5F2EA;
+    --ink:#1E2A26;
+    --gold:#B9862F;
+    --teal:#33635A;
+    --line:#D9D2C0;
+    --card:#FFFFFF;
+    --muted:#6B675C;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.5;
+  }
+  h1,h2,h3,.serif{ font-family:'Fraunces', serif; }
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:1300px; margin:0 auto; padding:0 24px; }
+  .pick-img{ width:100%; height:200px; object-fit:contain; border-radius:8px; margin-bottom:12px; display:block; background:#fff; }
+
+  header{ border-bottom:1px solid var(--line); padding:22px 0; }
+  header .wrap{ display:flex; justify-content:space-between; align-items:center; }
+  .logo{ font-size:22px; font-weight:600; letter-spacing:-0.01em; }
+  .logo img{ display:block; }
+  nav{ display:flex; gap:28px; font-size:14px; color:var(--muted); }
+  nav a:hover{ color:var(--ink); }
+
+  .page-hero{ padding:48px 0 32px; border-bottom:1px solid var(--line); }
+  .page-hero h1{ font-size:38px; font-weight:600; letter-spacing:-0.01em; }
+  .page-hero p{ margin-top:10px; font-size:16px; color:var(--muted); }
+  .breadcrumb{ font-size:13px; color:var(--muted); margin-bottom:14px; }
+  .breadcrumb a:hover{ color:var(--ink); text-decoration:underline; }
+
+  .section-head{ display:flex; justify-content:space-between; align-items:baseline; margin:40px 0 24px; }
+  .section-head .count{ font-size:13px; color:var(--muted); }
+
+  .picks{ display:grid; grid-template-columns:repeat(3, 1fr); gap:22px; margin-bottom:56px; }
+  .pick-card{ background:var(--card); border:1px solid var(--line); padding:22px; display:flex; flex-direction:column; gap:12px; }
+  .pick-rank{ font-size:13px; color:var(--gold); font-weight:600; }
+  .pick-card h3{ font-size:19px; font-weight:600; }
+  .pick-card .why{ font-size:14px; color:var(--muted); flex-grow:1; }
+  .stars{ font-size:14px; color:var(--gold); letter-spacing:2px; }
+  .pick-footer{ display:flex; justify-content:space-between; align-items:center; padding-top:10px; border-top:1px solid var(--line); }
+  .price{ font-weight:600; }
+  .cta-btn{ background:var(--teal); color:#fff; font-size:13px; font-weight:500; padding:9px 16px; border:none; cursor:pointer; }
+  .cta-btn:hover{ background:#274c45; }
+
+  footer{ margin-top:56px; border-top:1px solid var(--line); padding:28px 0; font-size:13px; color:var(--muted); }
+  footer .wrap{ display:flex; justify-content:space-between; }
+
+  #chatBubble{ position:fixed; bottom:20px; right:20px; width:56px; height:56px; border-radius:50%; background:#1b3a2f; color:#fff; display:flex; align-items:center; justify-content:center; font-size:26px; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,0.25); z-index:999; }
+  #chatBox{ position:fixed; bottom:88px; right:20px; width:300px; max-height:400px; background:#fff; border:1px solid var(--line); border-radius:10px; box-shadow:0 6px 20px rgba(0,0,0,0.2); display:none; flex-direction:column; z-index:999; overflow:hidden; }
+  #chatBox.open{ display:flex; }
+  #chatHeader{ background:#1b3a2f; color:#fff; padding:12px 14px; font-weight:600; font-size:14px; }
+  #chatMessages{ flex:1; padding:12px; overflow-y:auto; font-size:13.5px; }
+  .chatMsg{ margin-bottom:10px; padding:8px 10px; border-radius:8px; max-width:85%; line-height:1.4; }
+  .chatMsg.bot{ background:#f1efe8; align-self:flex-start; }
+  .chatMsg.user{ background:#1b3a2f; color:#fff; align-self:flex-end; margin-left:auto; }
+  #chatInputRow{ display:flex; border-top:1px solid var(--line); }
+  #chatInput{ flex:1; border:none; padding:10px; font-size:13.5px; outline:none; }
+  #chatSend{ background:#1b3a2f; color:#fff; border:none; padding:0 14px; cursor:pointer; }
+
+  @media (max-width:800px){
+    .picks{ grid-template-columns:1fr; }
+    nav{ display:none; }
+    .page-hero h1{ font-size:28px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="logo"><img src="logo.png" alt="The Shortlist" style="height:38px;"></div>
+    <nav>
+      <a href="index.html#picks">This Week's Picks</a>
+      <a href="index.html#compare">Compare</a>
+      <a href="index.html#categories">Categories</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="index.html">Home</a> / Fashion & Jewelry</div>
+    <h1>Fashion & Jewelry</h1>
+    <p>Style picks that don't feel disposable.</p>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="section-head">
+    <div class="count">13 products in this category</div>
+  </div>
+
+  <div class="picks">
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/H2fe9e8d41d934ca294bf3eb726a74cd8Q.jpg_220x220q75.jpg_.avif" alt="CAOSHI Bridal Wedding Ring Set">
+      <div class="pick-rank">Trending Pick</div>
+      <h3>CAOSHI Bridal Wedding Ring Set</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">Dazzling square zirconia stones and a delicate design make this perfect for both bridal and everyday wear.</p>
+      <div class="pick-footer">
+        <span class="price">Rs. 1,018</span>
+        <a href="https://s.click.aliexpress.com/e/_c4sfr96z" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/Sd01d3f9618324fc4b1c2cc6a8ed8485eg.jpg_220x220q75.jpg_.avif" alt="Bohemian Chiffon Maxi Dress">
+      <div class="pick-rank">Fashion Pick</div>
+      <h3>Bohemian Chiffon Maxi Dress</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">A floral print and high-waist design make this perfect for spring/summer outings or beach days.</p>
+      <div class="pick-footer">
+        <span class="price">Rs. 3,452</span>
+        <a href="https://s.click.aliexpress.com/e/_c300PgXx" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/S86e220bd179e4b55a66d13148b800ad7W.jpg_220x220q75.jpg_.avif" alt="Enamel Flower Cuff Bracelet">
+      <div class="pick-rank">Gift Idea</div>
+      <h3>Enamel Flower Cuff Bracelet</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">A gold-plated aesthetic design with an adjustable fit — perfect to pair with any outfit or give as a gift.</p>
+      <div class="pick-footer">
+        <span class="price">Rs. 738</span>
+        <a href="https://s.click.aliexpress.com/e/_c3s4pKVP" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/S78918fc8600542918ccfec96a9c29cb3Q.jpg_220x220q75.jpg_.avif" alt="Simple Flower Brooch Pin">
+      <div class="pick-rank">Accessory Pick</div>
+      <h3>Simple Flower Brooch Pin</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">A small, understated accent piece that works on jackets, bags, or scarves — an easy, low-cost accessory upgrade.</p>
+      <div class="pick-footer">
+        <span class="price">Rs. 548</span>
+        <a href="https://s.click.aliexpress.com/e/_c3v7ZOmt" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/Sb08dc3e4164349d8acf63f014a17d382z.jpg_220x220q75.jpg_.avif" alt="Chiffon Bohemian Maxi Dress">
+      <div class="pick-rank">Fashion Pick</div>
+      <h3>Chiffon Bohemian Maxi Dress</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">A high-waist, floral chiffon design suited to casual outings or beach days — lightweight for warm weather.</p>
+      <div class="pick-footer">
+        <span class="price">Rs. 4,036</span>
+        <a href="https://s.click.aliexpress.com/e/_c2w2qYNX" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/S8220f2af788146cc8471a763d0c1ee6cq.jpg?has_lang=1&ver=2_220x220q75.jpg_.avif" alt="Crystal Cross Stud Earrings">
+      <div class="pick-rank">Jewelry Pick</div>
+      <h3>Crystal Cross Stud Earrings</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">Simple crystal studs with a fishtail design — a low-cost accessory that pairs with both casual and formal outfits.</p>
+      <div class="pick-footer">
+        <span class="price">Rs. 386</span>
+        <a href="https://s.click.aliexpress.com/e/_c4koBdhT" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/S7d0c550b40fe453792f5f0eb416f3a76o.jpg_220x220q75.jpg_.avif" alt="Butterfly Flower Pendant Necklace">
+      <div class="pick-rank">Jewelry Pick</div>
+      <h3>Butterfly Flower Pendant Necklace</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">Titanium steel construction with anti-tarnish coating — a durable everyday piece that holds its finish longer than plated jewelry.</p>
+      <div class="pick-footer">
+        <span class="price">Rs. 1,060</span>
+        <a href="https://s.click.aliexpress.com/e/_c3zPUidf" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/S2487dc1d65a2483a87f2939e359803f7s.jpg?has_lang=1&ver=2_220x220q75.jpg_.avif" alt="POEDAGAR Luxury Men&#x27;s Watch">
+      <div class="pick-rank">Men&#x27;s Fashion</div>
+      <h3>POEDAGAR Luxury Men&#x27;s Watch</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">Waterproof, with a luminous dial and stainless steel build — a sharp everyday watch that doesn&#x27;t look budget.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 5,344.18</span>
+        <a href="https://s.click.aliexpress.com/e/_c3EcvX5J" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/S71318d54909d4f3eadc3d41a75216e21W.jpg" alt="LUXUSTEEL Crystal Earrings (10 Pairs)">
+      <div class="pick-rank">Jewelry Pick</div>
+      <h3>LUXUSTEEL Crystal Earrings (10 Pairs)</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">Stainless steel with CZ zircon stones — a full set for mixing and matching daily wear.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 1,341.89</span>
+        <a href="https://s.click.aliexpress.com/e/_c4EskJVn" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/Sf471c5f5ff094f9facdc67648d5dc943l.jpg" alt="ANIID Dubai Gold Color Ring">
+      <div class="pick-rank">Jewelry Pick</div>
+      <h3>ANIID Dubai Gold Color Ring</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">A resizable band with an Arabic-style design — a statement piece for bridal or everyday wear.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 488.81</span>
+        <a href="https://s.click.aliexpress.com/e/_c38ZzmJn" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/S0098c310135c424dbb4535676f3e828ch.jpg" alt="Cotton Linen Hooded Shirt">
+      <div class="pick-rank">Men&#x27;s Fashion</div>
+      <h3>Cotton Linen Hooded Shirt</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">Breathable, lightweight fabric with a drawstring hood — a comfortable pick for casual summer outfits.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 4,173.33</span>
+        <a href="https://s.click.aliexpress.com/e/_c4UPJ4kp" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/S517bf1dee08b451a846b9f8cde3869f8z.jpg" alt="Wooden Watch Storage Box">
+      <div class="pick-rank">Gift Idea</div>
+      <h3>Wooden Watch Storage Box</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">An eco-friendly wood design with multiple slot options — a clean, organized storage solution for watch collectors.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 6,677.52</span>
+        <a href="https://s.click.aliexpress.com/e/_c309c1yd" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/S65121f60c60d4739807cb0b933ed95e24.jpg" alt="Korean-Style Half Collar Pullover">
+      <div class="pick-rank">Women&#x27;s Fashion</div>
+      <h3>Korean-Style Half Collar Pullover</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">Warm knitwear in a basic solid color design — versatile for layering and a must-have for the autumn/winter wardrobe.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 4,602.30</span>
+        <a href="https://s.click.aliexpress.com/e/_c3TcaDRF" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 The Shortlist</span>
+    <span><a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy Policy</a> · <a href="disclosure.html">Affiliate Disclosure</a></span>
+  </div>
+</footer>
+
+<div id="chatBubble" onclick="toggleChat()">💬</div>
+<div id="chatBox">
+  <div id="chatHeader">Chat with us</div>
+  <div id="chatMessages"></div>
+  <div id="chatInputRow">
+    <input type="text" id="chatInput" placeholder="Type a message..." onkeydown="if(event.key==='Enter')sendChat()">
+    <button id="chatSend" onclick="sendChat()">➤</button>
+  </div>
+</div>
+<script>
+var faq = [
+  { keywords: ["delivery", "shipping", "how long", "arrive"], reply: "Delivery usually takes 4-5 days after your order is confirmed." },
+  { keywords: ["return", "refund", "exchange"], reply: "Returns and refunds follow the seller's policy (AliExpress or Amazon), since we link out to their store for the actual purchase." },
+  { keywords: ["payment", "cod", "cash on delivery", "pay"], reply: "Payment options depend on the seller's site — most support major cards and other standard checkout methods." },
+  { keywords: ["commission", "sponsored", "fake", "genuine", "real"], reply: "We use affiliate links, which means we may earn a small commission if you buy through them — at no extra cost to you. Every pick is still researched independently." },
+  { keywords: ["contact", "email", "phone", "reach"], reply: "You can reach us through the Contact page linked in the footer." },
+  { keywords: ["quality", "durable", "good"], reply: "We compare specs, price, and real buyer reviews before featuring any product, so quality is a key part of how picks are chosen." },
+  { keywords: ["about", "what is this", "who are you"], reply: "The Shortlist is a product-research site — we compare items across multiple options and link you to the best pick." }
+];
+function toggleChat(){
+  document.getElementById('chatBox').classList.toggle('open');
+  var msgBox = document.getElementById('chatMessages');
+  if(msgBox.children.length === 0){
+    addChatMsg("Hi! Ask me about delivery, returns, payment, or anything else.", "bot");
+  }
+}
+function addChatMsg(text, sender){
+  var msgBox = document.getElementById('chatMessages');
+  var div = document.createElement('div');
+  div.className = 'chatMsg ' + sender;
+  div.textContent = text;
+  msgBox.appendChild(div);
+  msgBox.scrollTop = msgBox.scrollHeight;
+}
+function sendChat(){
+  var input = document.getElementById('chatInput');
+  var text = input.value.trim();
+  if(!text) return;
+  addChatMsg(text, "user");
+  input.value = "";
+  setTimeout(function(){
+    var lower = text.toLowerCase();
+    var matched = faq.find(function(item){
+      return item.keywords.some(function(k){ return lower.includes(k); });
+    });
+    addChatMsg(matched ? matched.reply : "Sorry, I don't have an answer for that yet — try asking about delivery, returns, or payment.", "bot");
+  }, 500);
+}
+
+document.querySelectorAll('img.pick-img, .marquee-item img').forEach(function(img){
+  img.onerror = function(){
+    if(!this.dataset.retried){
+      this.dataset.retried = "1";
+      this.src = this.src.split('?')[0];
+    } else {
+      this.onerror = null;
+      this.src = 'https://placehold.co/220x220/f5f2ea/6b675c?text=Image+Unavailable';
+    }
+  };
+});
+</script>
+</body>
+</html>

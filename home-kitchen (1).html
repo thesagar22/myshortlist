@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home & Kitchen — The Shortlist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F5F2EA;
+    --ink:#1E2A26;
+    --gold:#B9862F;
+    --teal:#33635A;
+    --line:#D9D2C0;
+    --card:#FFFFFF;
+    --muted:#6B675C;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.5;
+  }
+  h1,h2,h3,.serif{ font-family:'Fraunces', serif; }
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:1300px; margin:0 auto; padding:0 24px; }
+  .pick-img{ width:100%; height:200px; object-fit:contain; border-radius:8px; margin-bottom:12px; display:block; background:#fff; }
+
+  header{ border-bottom:1px solid var(--line); padding:22px 0; }
+  header .wrap{ display:flex; justify-content:space-between; align-items:center; }
+  .logo{ font-size:22px; font-weight:600; letter-spacing:-0.01em; }
+  .logo img{ display:block; }
+  nav{ display:flex; gap:28px; font-size:14px; color:var(--muted); }
+  nav a:hover{ color:var(--ink); }
+
+  .page-hero{ padding:48px 0 32px; border-bottom:1px solid var(--line); }
+  .page-hero h1{ font-size:38px; font-weight:600; letter-spacing:-0.01em; }
+  .page-hero p{ margin-top:10px; font-size:16px; color:var(--muted); }
+  .breadcrumb{ font-size:13px; color:var(--muted); margin-bottom:14px; }
+  .breadcrumb a:hover{ color:var(--ink); text-decoration:underline; }
+
+  .section-head{ display:flex; justify-content:space-between; align-items:baseline; margin:40px 0 24px; }
+  .section-head .count{ font-size:13px; color:var(--muted); }
+
+  .picks{ display:grid; grid-template-columns:repeat(3, 1fr); gap:22px; margin-bottom:56px; }
+  .pick-card{ background:var(--card); border:1px solid var(--line); padding:22px; display:flex; flex-direction:column; gap:12px; }
+  .pick-rank{ font-size:13px; color:var(--gold); font-weight:600; }
+  .pick-card h3{ font-size:19px; font-weight:600; }
+  .pick-card .why{ font-size:14px; color:var(--muted); flex-grow:1; }
+  .stars{ font-size:14px; color:var(--gold); letter-spacing:2px; }
+  .pick-footer{ display:flex; justify-content:space-between; align-items:center; padding-top:10px; border-top:1px solid var(--line); }
+  .price{ font-weight:600; }
+  .cta-btn{ background:var(--teal); color:#fff; font-size:13px; font-weight:500; padding:9px 16px; border:none; cursor:pointer; }
+  .cta-btn:hover{ background:#274c45; }
+
+  footer{ margin-top:56px; border-top:1px solid var(--line); padding:28px 0; font-size:13px; color:var(--muted); }
+  footer .wrap{ display:flex; justify-content:space-between; }
+
+  #chatBubble{ position:fixed; bottom:20px; right:20px; width:56px; height:56px; border-radius:50%; background:#1b3a2f; color:#fff; display:flex; align-items:center; justify-content:center; font-size:26px; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,0.25); z-index:999; }
+  #chatBox{ position:fixed; bottom:88px; right:20px; width:300px; max-height:400px; background:#fff; border:1px solid var(--line); border-radius:10px; box-shadow:0 6px 20px rgba(0,0,0,0.2); display:none; flex-direction:column; z-index:999; overflow:hidden; }
+  #chatBox.open{ display:flex; }
+  #chatHeader{ background:#1b3a2f; color:#fff; padding:12px 14px; font-weight:600; font-size:14px; }
+  #chatMessages{ flex:1; padding:12px; overflow-y:auto; font-size:13.5px; }
+  .chatMsg{ margin-bottom:10px; padding:8px 10px; border-radius:8px; max-width:85%; line-height:1.4; }
+  .chatMsg.bot{ background:#f1efe8; align-self:flex-start; }
+  .chatMsg.user{ background:#1b3a2f; color:#fff; align-self:flex-end; margin-left:auto; }
+  #chatInputRow{ display:flex; border-top:1px solid var(--line); }
+  #chatInput{ flex:1; border:none; padding:10px; font-size:13.5px; outline:none; }
+  #chatSend{ background:#1b3a2f; color:#fff; border:none; padding:0 14px; cursor:pointer; }
+
+  @media (max-width:800px){
+    .picks{ grid-template-columns:1fr; }
+    nav{ display:none; }
+    .page-hero h1{ font-size:28px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="logo"><img src="logo.png" alt="The Shortlist" style="height:38px;"></div>
+    <nav>
+      <a href="index.html#picks">This Week's Picks</a>
+      <a href="index.html#compare">Compare</a>
+      <a href="index.html#categories">Categories</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="index.html">Home</a> / Home & Kitchen</div>
+    <h1>Home & Kitchen</h1>
+    <p>Everyday gear worth the counter space.</p>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="section-head">
+    <div class="count">14 products in this category</div>
+  </div>
+
+  <div class="picks">
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/S92609f22341348e9b1738ed736fe277co.jpg_220x220q75.jpg_.avif" alt="UVC Germicidal Sterilizer Lamp">
+      <div class="pick-rank">Home Essential</div>
+      <h3>UVC Germicidal Sterilizer Lamp</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">Helps sanitize bedrooms and home spaces, reducing dust mites and germs. Keep the room empty while in use.</p>
+      <div class="pick-footer">
+        <span class="price">Rs. 1,626</span>
+        <a href="https://s.click.aliexpress.com/e/_c4ciyAdB" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/S63dd98e8a1ef49078f3e5072ee1d33156.jpg_220x220q75.jpg_.avif" alt="Outdoor LED Festoon String Lights">
+      <div class="pick-rank">Decor Pick</div>
+      <h3>Outdoor LED Festoon String Lights</h3>
+      <div class="stars">★★★★★</div>
+      <p class="why">Perfect for patio, garden, or party decoration — a weatherproof design built for outdoor use.</p>
+      <div class="pick-footer">
+        <span class="price">Rs. 5,142</span>
+        <a href="https://s.click.aliexpress.com/e/_c36Ao7t7" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/S107421d4012a4e0e9c4a19d847bb1da6j.png?has_lang=1&ver=2_220x220.png_.avif" alt="1L Stainless Steel Thermal Water Bottle">
+      <div class="pick-rank">Everyday Essential</div>
+      <h3>1L Stainless Steel Thermal Water Bottle</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">A vacuum-insulated design keeps drinks hot or cold — practical for daily tea, coffee, or water on the go.</p>
+      <div class="pick-footer">
+        <span class="price">Rs. 4,585</span>
+        <a href="https://s.click.aliexpress.com/e/_c4WCmaIp" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/Sb427b3e9d73345b6bc6b294a00eca62dQ.jpg_220x220q75.jpg_.avif" alt="Retro European-Style Area Rug">
+      <div class="pick-rank">Home Decor</div>
+      <h3>Retro European-Style Area Rug</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">Non-slip backing and a decorative pattern that works well in living rooms, bedrooms, or entryways.</p>
+      <div class="pick-footer">
+        <span class="price">Rs. 4,854</span>
+        <a href="https://s.click.aliexpress.com/e/_c4NViNst" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/Sa0ea688933a44050b0efa8e56cf33351v.png?has_lang=1&ver=2_220x220.png_.avif" alt="Portable Mini Handheld Cooling Fan">
+      <div class="pick-rank">Summer Essential</div>
+      <h3>Portable Mini Handheld Cooling Fan</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">USB rechargeable with adjustable speed settings — compact enough to carry for outdoor use or commuting.</p>
+      <div class="pick-footer">
+        <span class="price">Rs. 5,750</span>
+        <a href="https://s.click.aliexpress.com/e/_c34cN78p" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/S82640280b73549e2bf134ab78e4890b78.jpg_220x220q75.jpg_.avif" alt="Quick-Dry Absorbent Towels (2-Pack)">
+      <div class="pick-rank">Home Essential</div>
+      <h3>Quick-Dry Absorbent Towels (2-Pack)</h3>
+      <div class="stars">★★★★★</div>
+      <p class="why">Strong water absorption with fast drying and minimal shedding — suited for home, beach, or gym use.</p>
+      <div class="pick-footer">
+        <span class="price">Rs. 1,758</span>
+        <a href="https://s.click.aliexpress.com/e/_c3yYknD3" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/Sb665c262e590405a8452eae55b346f3d6.jpg_220x220q75.jpg_.avif" alt="Stainless Steel Milk Frothing Pitcher">
+      <div class="pick-rank">Kitchen Pick</div>
+      <h3>Stainless Steel Milk Frothing Pitcher</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">Measuring markings and a precise pouring spout make this useful for home espresso and latte-making setups.</p>
+      <div class="pick-footer">
+        <span class="price">Rs. 924</span>
+        <a href="https://s.click.aliexpress.com/e/_c2vzjsT7" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/S30f51d15dc39445bb7ae01e77e9c0f1f4.jpg_220x220q75.jpg_.avif" alt="USB Starry Sky Projector — 360° Galaxy Night Light">
+      <div class="pick-rank">Trending</div>
+      <h3>USB Starry Sky Projector — 360° Galaxy Night Light</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">An adjustable galaxy atmosphere lamp for car interiors, bedrooms, or home decor — a romantic nightlight effect.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 2,827.40</span>
+        <a href="https://s.click.aliexpress.com/e/_c3H7SEsD" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/S95e52f794cdc413dae381d2c336806b0o.jpg" alt="4PCS Reusable Vacuum Storage Bags">
+      <div class="pick-rank">Home Organization</div>
+      <h3>4PCS Reusable Vacuum Storage Bags</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">A space-saving, transparent design useful for storing clothes or blankets during travel or closet organization.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 1,749.75</span>
+        <a href="https://s.click.aliexpress.com/e/_c2zEVPNB" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/Sa75ffa88dfc04ac4a380d77352ad274d2.jpg" alt="Diivoo Mini Turbo Water Sprinkler">
+      <div class="pick-rank">Garden Essential</div>
+      <h3>Diivoo Mini Turbo Water Sprinkler</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">Adjustable width, range, and flow rate — a flexible, large-base sprinkler for yard or garden watering.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 10,885.53</span>
+        <a href="https://s.click.aliexpress.com/e/_c3qD89mt" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/Sc224063f393a42a39fc15410776551b5c.jpg" alt="X8 Brushless Turbo Jet Fan Blower">
+      <div class="pick-rank">Home Essential</div>
+      <h3>X8 Brushless Turbo Jet Fan Blower</h3>
+      <div class="stars">★★★★★</div>
+      <p class="why">150,000RPM of powerful airflow — a cordless helper for dust cleaning, car detailing, or keyboard cleaning.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 5,863.22</span>
+        <a href="https://s.click.aliexpress.com/e/_c3F4OS3f" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/Sa8c19c44274e43708c98f1802093e4b7v.jpg" alt="Automatic Sensor Aromatherapy Machine">
+      <div class="pick-rank">Home Fragrance</div>
+      <h3>Automatic Sensor Aromatherapy Machine</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">Wall-mounted, USB rechargeable, with a built-in clock function — a hands-free fragrance dispenser for home or office.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 2,426.80</span>
+        <a href="https://s.click.aliexpress.com/e/_c4rDR4dT" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/Se46f49195fbf4800a55526a543f39d2eT.jpg" alt="AC Cleaning Cover Kit">
+      <div class="pick-rank">Home Essential</div>
+      <h3>AC Cleaning Cover Kit</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">A waterproof dust-washing bag — a mess-free, DIY solution for self-cleaning your split AC unit.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 11,517.84</span>
+        <a href="https://s.click.aliexpress.com/e/_c3EHN5G9" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/S3ea60a96f05f42f49b153568873afd28U.jpg" alt="12-Layer Fruit &amp; Vegetable Dehydrator">
+      <div class="pick-rank">Kitchen Essential</div>
+      <h3>12-Layer Fruit &amp; Vegetable Dehydrator</h3>
+      <div class="stars">★★★★★</div>
+      <p class="why">A 220V commercial-grade dryer — a large-capacity option for drying fruits, snacks, meat, and medicinal herbs.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 40,219.94</span>
+        <a href="https://s.click.aliexpress.com/e/_c3Ml88W9" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 The Shortlist</span>
+    <span><a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy Policy</a> · <a href="disclosure.html">Affiliate Disclosure</a></span>
+  </div>
+</footer>
+
+<div id="chatBubble" onclick="toggleChat()">💬</div>
+<div id="chatBox">
+  <div id="chatHeader">Chat with us</div>
+  <div id="chatMessages"></div>
+  <div id="chatInputRow">
+    <input type="text" id="chatInput" placeholder="Type a message..." onkeydown="if(event.key==='Enter')sendChat()">
+    <button id="chatSend" onclick="sendChat()">➤</button>
+  </div>
+</div>
+<script>
+var faq = [
+  { keywords: ["delivery", "shipping", "how long", "arrive"], reply: "Delivery usually takes 4-5 days after your order is confirmed." },
+  { keywords: ["return", "refund", "exchange"], reply: "Returns and refunds follow the seller's policy (AliExpress or Amazon), since we link out to their store for the actual purchase." },
+  { keywords: ["payment", "cod", "cash on delivery", "pay"], reply: "Payment options depend on the seller's site — most support major cards and other standard checkout methods." },
+  { keywords: ["commission", "sponsored", "fake", "genuine", "real"], reply: "We use affiliate links, which means we may earn a small commission if you buy through them — at no extra cost to you. Every pick is still researched independently." },
+  { keywords: ["contact", "email", "phone", "reach"], reply: "You can reach us through the Contact page linked in the footer." },
+  { keywords: ["quality", "durable", "good"], reply: "We compare specs, price, and real buyer reviews before featuring any product, so quality is a key part of how picks are chosen." },
+  { keywords: ["about", "what is this", "who are you"], reply: "The Shortlist is a product-research site — we compare items across multiple options and link you to the best pick." }
+];
+function toggleChat(){
+  document.getElementById('chatBox').classList.toggle('open');
+  var msgBox = document.getElementById('chatMessages');
+  if(msgBox.children.length === 0){
+    addChatMsg("Hi! Ask me about delivery, returns, payment, or anything else.", "bot");
+  }
+}
+function addChatMsg(text, sender){
+  var msgBox = document.getElementById('chatMessages');
+  var div = document.createElement('div');
+  div.className = 'chatMsg ' + sender;
+  div.textContent = text;
+  msgBox.appendChild(div);
+  msgBox.scrollTop = msgBox.scrollHeight;
+}
+function sendChat(){
+  var input = document.getElementById('chatInput');
+  var text = input.value.trim();
+  if(!text) return;
+  addChatMsg(text, "user");
+  input.value = "";
+  setTimeout(function(){
+    var lower = text.toLowerCase();
+    var matched = faq.find(function(item){
+      return item.keywords.some(function(k){ return lower.includes(k); });
+    });
+    addChatMsg(matched ? matched.reply : "Sorry, I don't have an answer for that yet — try asking about delivery, returns, or payment.", "bot");
+  }, 500);
+}
+
+document.querySelectorAll('img.pick-img, .marquee-item img').forEach(function(img){
+  img.onerror = function(){
+    if(!this.dataset.retried){
+      this.dataset.retried = "1";
+      this.src = this.src.split('?')[0];
+    } else {
+      this.onerror = null;
+      this.src = 'https://placehold.co/220x220/f5f2ea/6b675c?text=Image+Unavailable';
+    }
+  };
+});
+</script>
+</body>
+</html>

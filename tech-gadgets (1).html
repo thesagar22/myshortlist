@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tech & Gadgets — The Shortlist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F5F2EA;
+    --ink:#1E2A26;
+    --gold:#B9862F;
+    --teal:#33635A;
+    --line:#D9D2C0;
+    --card:#FFFFFF;
+    --muted:#6B675C;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.5;
+  }
+  h1,h2,h3,.serif{ font-family:'Fraunces', serif; }
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:1300px; margin:0 auto; padding:0 24px; }
+  .pick-img{ width:100%; height:200px; object-fit:contain; border-radius:8px; margin-bottom:12px; display:block; background:#fff; }
+
+  header{ border-bottom:1px solid var(--line); padding:22px 0; }
+  header .wrap{ display:flex; justify-content:space-between; align-items:center; }
+  .logo{ font-size:22px; font-weight:600; letter-spacing:-0.01em; }
+  .logo img{ display:block; }
+  nav{ display:flex; gap:28px; font-size:14px; color:var(--muted); }
+  nav a:hover{ color:var(--ink); }
+
+  .page-hero{ padding:48px 0 32px; border-bottom:1px solid var(--line); }
+  .page-hero h1{ font-size:38px; font-weight:600; letter-spacing:-0.01em; }
+  .page-hero p{ margin-top:10px; font-size:16px; color:var(--muted); }
+  .breadcrumb{ font-size:13px; color:var(--muted); margin-bottom:14px; }
+  .breadcrumb a:hover{ color:var(--ink); text-decoration:underline; }
+
+  .section-head{ display:flex; justify-content:space-between; align-items:baseline; margin:40px 0 24px; }
+  .section-head .count{ font-size:13px; color:var(--muted); }
+
+  .picks{ display:grid; grid-template-columns:repeat(3, 1fr); gap:22px; margin-bottom:56px; }
+  .pick-card{ background:var(--card); border:1px solid var(--line); padding:22px; display:flex; flex-direction:column; gap:12px; }
+  .pick-rank{ font-size:13px; color:var(--gold); font-weight:600; }
+  .pick-card h3{ font-size:19px; font-weight:600; }
+  .pick-card .why{ font-size:14px; color:var(--muted); flex-grow:1; }
+  .stars{ font-size:14px; color:var(--gold); letter-spacing:2px; }
+  .pick-footer{ display:flex; justify-content:space-between; align-items:center; padding-top:10px; border-top:1px solid var(--line); }
+  .price{ font-weight:600; }
+  .cta-btn{ background:var(--teal); color:#fff; font-size:13px; font-weight:500; padding:9px 16px; border:none; cursor:pointer; }
+  .cta-btn:hover{ background:#274c45; }
+
+  footer{ margin-top:56px; border-top:1px solid var(--line); padding:28px 0; font-size:13px; color:var(--muted); }
+  footer .wrap{ display:flex; justify-content:space-between; }
+
+  #chatBubble{ position:fixed; bottom:20px; right:20px; width:56px; height:56px; border-radius:50%; background:#1b3a2f; color:#fff; display:flex; align-items:center; justify-content:center; font-size:26px; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,0.25); z-index:999; }
+  #chatBox{ position:fixed; bottom:88px; right:20px; width:300px; max-height:400px; background:#fff; border:1px solid var(--line); border-radius:10px; box-shadow:0 6px 20px rgba(0,0,0,0.2); display:none; flex-direction:column; z-index:999; overflow:hidden; }
+  #chatBox.open{ display:flex; }
+  #chatHeader{ background:#1b3a2f; color:#fff; padding:12px 14px; font-weight:600; font-size:14px; }
+  #chatMessages{ flex:1; padding:12px; overflow-y:auto; font-size:13.5px; }
+  .chatMsg{ margin-bottom:10px; padding:8px 10px; border-radius:8px; max-width:85%; line-height:1.4; }
+  .chatMsg.bot{ background:#f1efe8; align-self:flex-start; }
+  .chatMsg.user{ background:#1b3a2f; color:#fff; align-self:flex-end; margin-left:auto; }
+  #chatInputRow{ display:flex; border-top:1px solid var(--line); }
+  #chatInput{ flex:1; border:none; padding:10px; font-size:13.5px; outline:none; }
+  #chatSend{ background:#1b3a2f; color:#fff; border:none; padding:0 14px; cursor:pointer; }
+
+  @media (max-width:800px){
+    .picks{ grid-template-columns:1fr; }
+    nav{ display:none; }
+    .page-hero h1{ font-size:28px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="logo"><img src="logo.png" alt="The Shortlist" style="height:38px;"></div>
+    <nav>
+      <a href="index.html#picks">This Week's Picks</a>
+      <a href="index.html#compare">Compare</a>
+      <a href="index.html#categories">Categories</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="index.html">Home</a> / Tech & Gadgets</div>
+    <h1>Tech & Gadgets</h1>
+    <p>What's actually useful, not just new.</p>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="section-head">
+    <div class="count">22 products in this category</div>
+  </div>
+
+  <div class="picks">
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/Se33b2e1f0eb44d208ef2807472d52618W.jpg_220x220q75.jpg_.avif" alt="Pro Wireless Earbuds X1">
+      <div class="pick-rank">Best Overall</div>
+      <h3>Pro Wireless Earbuds X1</h3>
+      <div class="stars">★★★★★</div>
+      <p class="why">Active noise cancellation, 30-hour battery life, and crystal-clear calls make this a perfect everyday pick.</p>
+      <div class="pick-footer">
+        <span class="price">Rs. 2,999</span>
+        <a href="https://s.click.aliexpress.com/e/_c4B98GFb" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/S3323ff9d1dcf4580957c2c4e83bca83ai.jpg_220x220q75.jpg_.avif" alt="Adjustable Desktop Phone Stand">
+      <div class="pick-rank">Best Budget</div>
+      <h3>Adjustable Desktop Phone Stand</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">Sturdy, foldable, and fits nearly every phone size — a must-have for video calls or movie nights.</p>
+      <div class="pick-footer">
+        <span class="price">Rs. 450</span>
+        <a href="https://s.click.aliexpress.com/e/_c3WCcq5f" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/S42dbb3722ab54223bf546007ee0eb209h.png_220x220.png_.avif" alt="FitPro Smartwatch S3">
+      <div class="pick-rank">Best Upgrade</div>
+      <h3>FitPro Smartwatch S3</h3>
+      <div class="stars">★★★★★</div>
+      <p class="why">Heart-rate tracking, SpO2 monitor, and 7-day battery life make this a top pick for health-conscious users.</p>
+      <div class="pick-footer">
+        <span class="price">Rs. 4,999</span>
+        <a href="https://s.click.aliexpress.com/e/_c3fMD2At" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/S5393f42d569e4d0d903d05c520d75a01O.jpg_220x220q75.jpg_.avif" alt="Universal Laptop Sleeve Case">
+      <div class="pick-rank">Work Essential</div>
+      <h3>Universal Laptop Sleeve Case</h3>
+      <div class="stars">★★★★★</div>
+      <p class="why">Shockproof padding and multiple size options keep your laptop safe during daily commutes or travel.</p>
+      <div class="pick-footer">
+        <span class="price">Rs. 1,100</span>
+        <a href="https://s.click.aliexpress.com/e/_c4oE0cWh" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://m.media-amazon.com/images/W/BW_MEDIAX_AVIF_MEASUREMENT_1306696-T3/images/I/61P4QAI28CL._AC_SL1500_.jpg" alt="Bluetooth 5.3 HiFi Earbuds">
+      <div class="pick-rank">Amazon&#x27;s Choice</div>
+      <h3>Bluetooth 5.3 HiFi Earbuds</h3>
+      <div class="stars">★★★★★</div>
+      <p class="why">ENC noise cancellation, IPX7 waterproofing, and 50-hour playback make this a durable pick for the gym, running, or work.</p>
+      <div class="pick-footer">
+        <span class="price">$19.97</span>
+        <a href="https://amzn.to/4gQlMCR" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://m.media-amazon.com/images/W/BW_MEDIAX_AVIF_MEASUREMENT_1306696-T3/images/I/719iH8kNmYL._SL1500_.jpg" alt="4-in-1 USB C Fast Charging Cable">
+      <div class="pick-rank">Best Seller</div>
+      <h3>4-in-1 USB C Fast Charging Cable</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">MFi certified with 60W fast charging and a braided nylon design — over 1,000 people bought this last month.</p>
+      <div class="pick-footer">
+        <span class="price">$19.99</span>
+        <a href="https://amzn.to/4qYFyRk" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/S4526e3ec19f040e7a81f2674c8070ad5N.jpg" alt="4-Pack ND/CPL Filter Set (DJI Air 3S)">
+      <div class="pick-rank">Drone Accessory</div>
+      <h3>4-Pack ND/CPL Filter Set (DJI Air 3S)</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">A set of neutral density filters for better exposure control in aerial photography and videography.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 4,603.69</span>
+        <a href="https://s.click.aliexpress.com/e/_c40CZK57" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/Sd5b1c4b0664d4de08b83720b866c355cA.jpg" alt="V34 Mini Drone (4K/8K Camera)">
+      <div class="pick-rank">Trending Tech</div>
+      <h3>V34 Mini Drone (4K/8K Camera)</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">Obstacle avoidance, a foldable design, and a brushless motor make this an accessible aerial photography drone for beginners.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 21,976.12</span>
+        <a href="https://s.click.aliexpress.com/e/_c3o1bM6l" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/S7ed6f44ff9904f39bb87a64b790dcbae3.jpg" alt="SmartDevil Dust-Free Screen Protector">
+      <div class="pick-rank">Tech Essential</div>
+      <h3>SmartDevil Dust-Free Screen Protector</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">A dustproof, dust-free installation kit for iPhone 17 Pro Max — designed for bubble-free fitting.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 3,206.84</span>
+        <a href="https://s.click.aliexpress.com/e/_c4EHeBhB" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/Sea24c6c207164313bdba6a40ea6c68c9Z.jpg" alt="VR Shinecon 3D Headset">
+      <div class="pick-rank">Gaming Pick</div>
+      <h3>VR Shinecon 3D Headset</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">A smartphone-compatible VR headset for an immersive experience with movies, games, and 360° video.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 2,506.32</span>
+        <a href="https://s.click.aliexpress.com/e/_c3egAVjT" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/Sc4a713768bb2447aa32e0fca52402b59b.jpg" alt="18650 Battery Heat Shrink Tube Pack">
+      <div class="pick-rank">DIY Essential</div>
+      <h3>18650 Battery Heat Shrink Tube Pack</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">An insulated PVC wrap in multiple sizes — essential for protecting battery packs and cables for DIY hobbyists.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 379.84</span>
+        <a href="https://s.click.aliexpress.com/e/_c41f5Zcz" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/S9f216d48ca3f47a185a14d49c0e920ecl.png" alt="8mm Endoscope Camera (Adjustable Light)">
+      <div class="pick-rank">Tech Essential</div>
+      <h3>8mm Endoscope Camera (Adjustable Light)</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">1920P resolution with a semi-rigid snake cable — a handy tool for inspecting tight spaces via your phone.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 2,770.35</span>
+        <a href="https://s.click.aliexpress.com/e/_c3I2c8br" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/S5814bf47628f403ba4bc9fec9009426ar.png" alt="USB C Hub 8-in-1">
+      <div class="pick-rank">Tech Essential</div>
+      <h3>USB C Hub 8-in-1</h3>
+      <div class="stars">★★★★★</div>
+      <p class="why">4K HDMI, RJ45, an SD/TF card reader, and PD fast charge — a complete adapter for MacBook or laptop users.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 1,033.57</span>
+        <a href="https://s.click.aliexpress.com/e/_c2yTLBMV" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/Sc49ca8ce55d94f7c83621db374de87eaj.jpg" alt="Intel Core i9-10980HK Gaming Laptop">
+      <div class="pick-rank">Premium Tech</div>
+      <h3>Intel Core i9-10980HK Gaming Laptop</h3>
+      <div class="stars">★★★★★</div>
+      <p class="why">32GB DDR4 RAM and a 2TB SSD — powerful specs for gaming and heavy office work in one machine.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 76,956.91</span>
+        <a href="https://s.click.aliexpress.com/e/_c3oqSoct" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/Sb410e0a24d6244049172ba462810af51M.jpg" alt="Kebidumei WiFi Range Extender">
+      <div class="pick-rank">Tech Essential</div>
+      <h3>Kebidumei WiFi Range Extender</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">A dual-band 2.4G/5G signal booster — an easy, plug-in solution for covering weak WiFi zones at home.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 3,131.07</span>
+        <a href="https://s.click.aliexpress.com/e/_c3X7ZDFF" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/S14e1f169c71e4416b663527519606e06M.jpg" alt="Smart Leather Flip Case (Galaxy S22-S26)">
+      <div class="pick-rank">Phone Accessory</div>
+      <h3>Smart Leather Flip Case (Galaxy S22-S26)</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">A window-view design with touch display support, letting you check notifications without opening the case.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 2,883.04</span>
+        <a href="https://s.click.aliexpress.com/e/_c3vRs7Q1" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/S7f82ae05e9b14307980ef3f34822ea0bo.jpg" alt="K55 Lavalier Bluetooth Earphones">
+      <div class="pick-rank">Audio Pick</div>
+      <h3>K55 Lavalier Bluetooth Earphones</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">A 20-hour battery, LED display, and noise cancelling make this reliable for business calls and music alike.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 2,764.78</span>
+        <a href="https://s.click.aliexpress.com/e/_c4PSEzhP" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/S0309c8a9474e4ade8a868742c1bc59c9Z.png" alt="G.L Wear Smart Watch">
+      <div class="pick-rank">Wearable Tech</div>
+      <h3>G.L Wear Smart Watch</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">An HD display with Bluetooth calling and a voice assistant — health tracking and everyday convenience in one watch.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 4,736.94</span>
+        <a href="https://s.click.aliexpress.com/e/_c3z6FEFX" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/S465931c4d4f9498da617dabdfe69286at.png" alt="Lenovo Z906 8K Aerial Drone">
+      <div class="pick-rank">Trending Tech</div>
+      <h3>Lenovo Z906 8K Aerial Drone</h3>
+      <div class="stars">★★★★★</div>
+      <p class="why">GPS and obstacle avoidance in a foldable, brushless-motor drone — a beginner-friendly choice for aerial photography.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 11,030.84</span>
+        <a href="https://s.click.aliexpress.com/e/_c3igE4yt" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/S8df6963d2d304e7d8b406d74ba42c915W.png" alt="SmartDevil Screen Protector (Vivo X200/X300)">
+      <div class="pick-rank">Phone Accessory</div>
+      <h3>SmartDevil Screen Protector (Vivo X200/X300)</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">Anti-blue light, anti-fingerprint tempered glass — a 2-pack set that protects the screen from scratches.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 4,246.72</span>
+        <a href="https://s.click.aliexpress.com/e/_c4Wv124t" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/Sa2e1765ab4084618b0d0bd750206e60fz.jpg" alt="72 LED Selfie/Video Light">
+      <div class="pick-rank">Content Creator Pick</div>
+      <h3>72 LED Selfie/Video Light</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">A front and back phone clip design, rechargeable — portable lighting for video calls, TikTok content, or photography.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 6,003.89</span>
+        <a href="https://s.click.aliexpress.com/e/_c31OZetT" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/S36ecb12b8826433a89ecdd12dce8a5aes.jpg" alt="Ultra-Thin Case (Galaxy Z Fold 5G Series)">
+      <div class="pick-rank">Phone Accessory</div>
+      <h3>Ultra-Thin Case (Galaxy Z Fold 5G Series)</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">Includes a screen protector film — a slim-fit way to guard a foldable phone against drops and scratches.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 2,973.69</span>
+        <a href="https://s.click.aliexpress.com/e/_c3tfU5Cl" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 The Shortlist</span>
+    <span><a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy Policy</a> · <a href="disclosure.html">Affiliate Disclosure</a></span>
+  </div>
+</footer>
+
+<div id="chatBubble" onclick="toggleChat()">💬</div>
+<div id="chatBox">
+  <div id="chatHeader">Chat with us</div>
+  <div id="chatMessages"></div>
+  <div id="chatInputRow">
+    <input type="text" id="chatInput" placeholder="Type a message..." onkeydown="if(event.key==='Enter')sendChat()">
+    <button id="chatSend" onclick="sendChat()">➤</button>
+  </div>
+</div>
+<script>
+var faq = [
+  { keywords: ["delivery", "shipping", "how long", "arrive"], reply: "Delivery usually takes 4-5 days after your order is confirmed." },
+  { keywords: ["return", "refund", "exchange"], reply: "Returns and refunds follow the seller's policy (AliExpress or Amazon), since we link out to their store for the actual purchase." },
+  { keywords: ["payment", "cod", "cash on delivery", "pay"], reply: "Payment options depend on the seller's site — most support major cards and other standard checkout methods." },
+  { keywords: ["commission", "sponsored", "fake", "genuine", "real"], reply: "We use affiliate links, which means we may earn a small commission if you buy through them — at no extra cost to you. Every pick is still researched independently." },
+  { keywords: ["contact", "email", "phone", "reach"], reply: "You can reach us through the Contact page linked in the footer." },
+  { keywords: ["quality", "durable", "good"], reply: "We compare specs, price, and real buyer reviews before featuring any product, so quality is a key part of how picks are chosen." },
+  { keywords: ["about", "what is this", "who are you"], reply: "The Shortlist is a product-research site — we compare items across multiple options and link you to the best pick." }
+];
+function toggleChat(){
+  document.getElementById('chatBox').classList.toggle('open');
+  var msgBox = document.getElementById('chatMessages');
+  if(msgBox.children.length === 0){
+    addChatMsg("Hi! Ask me about delivery, returns, payment, or anything else.", "bot");
+  }
+}
+function addChatMsg(text, sender){
+  var msgBox = document.getElementById('chatMessages');
+  var div = document.createElement('div');
+  div.className = 'chatMsg ' + sender;
+  div.textContent = text;
+  msgBox.appendChild(div);
+  msgBox.scrollTop = msgBox.scrollHeight;
+}
+function sendChat(){
+  var input = document.getElementById('chatInput');
+  var text = input.value.trim();
+  if(!text) return;
+  addChatMsg(text, "user");
+  input.value = "";
+  setTimeout(function(){
+    var lower = text.toLowerCase();
+    var matched = faq.find(function(item){
+      return item.keywords.some(function(k){ return lower.includes(k); });
+    });
+    addChatMsg(matched ? matched.reply : "Sorry, I don't have an answer for that yet — try asking about delivery, returns, or payment.", "bot");
+  }, 500);
+}
+
+document.querySelectorAll('img.pick-img, .marquee-item img').forEach(function(img){
+  img.onerror = function(){
+    if(!this.dataset.retried){
+      this.dataset.retried = "1";
+      this.src = this.src.split('?')[0];
+    } else {
+      this.onerror = null;
+      this.src = 'https://placehold.co/220x220/f5f2ea/6b675c?text=Image+Unavailable';
+    }
+  };
+});
+</script>
+</body>
+</html>

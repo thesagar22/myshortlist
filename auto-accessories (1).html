@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auto Accessories — The Shortlist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F5F2EA;
+    --ink:#1E2A26;
+    --gold:#B9862F;
+    --teal:#33635A;
+    --line:#D9D2C0;
+    --card:#FFFFFF;
+    --muted:#6B675C;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.5;
+  }
+  h1,h2,h3,.serif{ font-family:'Fraunces', serif; }
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:1300px; margin:0 auto; padding:0 24px; }
+  .pick-img{ width:100%; height:200px; object-fit:contain; border-radius:8px; margin-bottom:12px; display:block; background:#fff; }
+
+  header{ border-bottom:1px solid var(--line); padding:22px 0; }
+  header .wrap{ display:flex; justify-content:space-between; align-items:center; }
+  .logo{ font-size:22px; font-weight:600; letter-spacing:-0.01em; }
+  .logo img{ display:block; }
+  nav{ display:flex; gap:28px; font-size:14px; color:var(--muted); }
+  nav a:hover{ color:var(--ink); }
+
+  .page-hero{ padding:48px 0 32px; border-bottom:1px solid var(--line); }
+  .page-hero h1{ font-size:38px; font-weight:600; letter-spacing:-0.01em; }
+  .page-hero p{ margin-top:10px; font-size:16px; color:var(--muted); }
+  .breadcrumb{ font-size:13px; color:var(--muted); margin-bottom:14px; }
+  .breadcrumb a:hover{ color:var(--ink); text-decoration:underline; }
+
+  .section-head{ display:flex; justify-content:space-between; align-items:baseline; margin:40px 0 24px; }
+  .section-head .count{ font-size:13px; color:var(--muted); }
+
+  .picks{ display:grid; grid-template-columns:repeat(3, 1fr); gap:22px; margin-bottom:56px; }
+  .pick-card{ background:var(--card); border:1px solid var(--line); padding:22px; display:flex; flex-direction:column; gap:12px; }
+  .pick-rank{ font-size:13px; color:var(--gold); font-weight:600; }
+  .pick-card h3{ font-size:19px; font-weight:600; }
+  .pick-card .why{ font-size:14px; color:var(--muted); flex-grow:1; }
+  .stars{ font-size:14px; color:var(--gold); letter-spacing:2px; }
+  .pick-footer{ display:flex; justify-content:space-between; align-items:center; padding-top:10px; border-top:1px solid var(--line); }
+  .price{ font-weight:600; }
+  .cta-btn{ background:var(--teal); color:#fff; font-size:13px; font-weight:500; padding:9px 16px; border:none; cursor:pointer; }
+  .cta-btn:hover{ background:#274c45; }
+
+  footer{ margin-top:56px; border-top:1px solid var(--line); padding:28px 0; font-size:13px; color:var(--muted); }
+  footer .wrap{ display:flex; justify-content:space-between; }
+
+  #chatBubble{ position:fixed; bottom:20px; right:20px; width:56px; height:56px; border-radius:50%; background:#1b3a2f; color:#fff; display:flex; align-items:center; justify-content:center; font-size:26px; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,0.25); z-index:999; }
+  #chatBox{ position:fixed; bottom:88px; right:20px; width:300px; max-height:400px; background:#fff; border:1px solid var(--line); border-radius:10px; box-shadow:0 6px 20px rgba(0,0,0,0.2); display:none; flex-direction:column; z-index:999; overflow:hidden; }
+  #chatBox.open{ display:flex; }
+  #chatHeader{ background:#1b3a2f; color:#fff; padding:12px 14px; font-weight:600; font-size:14px; }
+  #chatMessages{ flex:1; padding:12px; overflow-y:auto; font-size:13.5px; }
+  .chatMsg{ margin-bottom:10px; padding:8px 10px; border-radius:8px; max-width:85%; line-height:1.4; }
+  .chatMsg.bot{ background:#f1efe8; align-self:flex-start; }
+  .chatMsg.user{ background:#1b3a2f; color:#fff; align-self:flex-end; margin-left:auto; }
+  #chatInputRow{ display:flex; border-top:1px solid var(--line); }
+  #chatInput{ flex:1; border:none; padding:10px; font-size:13.5px; outline:none; }
+  #chatSend{ background:#1b3a2f; color:#fff; border:none; padding:0 14px; cursor:pointer; }
+
+  @media (max-width:800px){
+    .picks{ grid-template-columns:1fr; }
+    nav{ display:none; }
+    .page-hero h1{ font-size:28px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="logo"><img src="logo.png" alt="The Shortlist" style="height:38px;"></div>
+    <nav>
+      <a href="index.html#picks">This Week's Picks</a>
+      <a href="index.html#compare">Compare</a>
+      <a href="index.html#categories">Categories</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="index.html">Home</a> / Auto Accessories</div>
+    <h1>Auto Accessories</h1>
+    <p>Upgrades and essentials for your car.</p>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="section-head">
+    <div class="count">9 products in this category</div>
+  </div>
+
+  <div class="picks">
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/S33a32adf03154d0d93d59684a7e77122Q.jpg_220x220q75.jpg_.avif" alt="Solar Car Security Warning Light">
+      <div class="pick-rank">Safety Pick</div>
+      <h3>Solar Car Security Warning Light</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">Simulates a fake alarm flash — an easy, wireless, solar-powered way to help deter car theft.</p>
+      <div class="pick-footer">
+        <span class="price">Rs. 724</span>
+        <a href="https://s.click.aliexpress.com/e/_c31jtz4p" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/S28ca4fe7a5864860bdcdedc3e2a7e061C.jpg?has_lang=1&ver=2_220x220q75.jpg_.avif" alt="Solar Flashing Warning Light — LED Safety Strobe Light">
+      <div class="pick-rank">51% OFF</div>
+      <h3>Solar Flashing Warning Light — LED Safety Strobe Light</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">An adjustable auto parking lamp and rear warning light — solar-powered, no wiring needed.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 779.28</span>
+        <a href="https://s.click.aliexpress.com/e/_c3QD5TvR" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/Sd44d3b4bbf824e1db6f51eebeb1cf97fU.jpg" alt="Car Trunk Mats (Changan Deepal S05)">
+      <div class="pick-rank">Auto Accessory</div>
+      <h3>Car Trunk Mats (Changan Deepal S05)</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">A waterproof cargo liner that protects the trunk from spills and wear — an easy-to-clean design.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 13,987.22</span>
+        <a href="https://s.click.aliexpress.com/e/_c4OJHcQd" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/Sce15e8b06929425ab2d21ad3e807230dl.jpg?has_lang=1&ver=2_220x220q75.jpg_.avif" alt="Car Vehicle Anti-Lost GPS Tracker">
+      <div class="pick-rank">Travel &amp; Safety</div>
+      <h3>Car Vehicle Anti-Lost GPS Tracker</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">Bluetooth-based tracking makes this a small, easy-to-hide locator for cars, bikes, or bags.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 1,188.17</span>
+        <a href="https://s.click.aliexpress.com/e/_c4ctN51X" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/S549b1e02df67424abbb20e61d25be0edo.jpg" alt="7KW Portable EV Charger">
+      <div class="pick-rank">EV Essential</div>
+      <h3>7KW Portable EV Charger</h3>
+      <div class="stars">★★★★★</div>
+      <p class="why">WiFi and Bluetooth control with fast charging — a solid home-charging option for electric car owners.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 40,655.18</span>
+        <a href="https://s.click.aliexpress.com/e/_c4CvEzXx" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/S50beb71544db4c11be586b82c747e303v.jpg" alt="LC300 Car Armrest Cover">
+      <div class="pick-rank">Auto Accessory</div>
+      <h3>LC300 Car Armrest Cover</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">Stain-resistant leather with an elbow support cushion — an interior upgrade for Land Cruiser 300 owners.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 7,931.94</span>
+        <a href="https://s.click.aliexpress.com/e/_c2zuwLlP" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/S3e376077d5e2419594f7a0c27f9c82c3b.png" alt="GReddi 62mm Digital Car Gauge">
+      <div class="pick-rank">Auto Accessory</div>
+      <h3>GReddi 62mm Digital Car Gauge</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">Oil pressure, oil temp, water temp, and boost gauge in a single LCD display — a must-have for car enthusiasts.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 11,081.91</span>
+        <a href="https://s.click.aliexpress.com/e/_c3bIbyI5" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/S159b19802fbf4f2299122164163f4d4fc.jpg" alt="Universal Android 13 Car Radio">
+      <div class="pick-rank">Auto Tech</div>
+      <h3>Universal Android 13 Car Radio</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">GPS, Bluetooth, and multimedia support upgrade an older car into a smart infotainment system.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 15,853.52</span>
+        <a href="https://s.click.aliexpress.com/e/_c40CuwJB" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+    <div class="pick-card">
+      <img class="pick-img" src="https://ae-pic-a1.aliexpress-media.com/kf/S85c3a32e728c45e9a4abaf74b929e3f3I.jpg" alt="MEKEDE Carplay Android Auto Radio">
+      <div class="pick-rank">Auto Tech</div>
+      <h3>MEKEDE Carplay Android Auto Radio</h3>
+      <div class="stars">★★★★☆</div>
+      <p class="why">A 6.86&quot; display with BT, FM, and USB Type-C — turns an older car into a modern infotainment system.</p>
+      <div class="pick-footer">
+        <span class="price">PKR 15,049.43</span>
+        <a href="https://s.click.aliexpress.com/e/_c3Lt70wz" class="cta-btn">View Deal →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 The Shortlist</span>
+    <span><a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy Policy</a> · <a href="disclosure.html">Affiliate Disclosure</a></span>
+  </div>
+</footer>
+
+<div id="chatBubble" onclick="toggleChat()">💬</div>
+<div id="chatBox">
+  <div id="chatHeader">Chat with us</div>
+  <div id="chatMessages"></div>
+  <div id="chatInputRow">
+    <input type="text" id="chatInput" placeholder="Type a message..." onkeydown="if(event.key==='Enter')sendChat()">
+    <button id="chatSend" onclick="sendChat()">➤</button>
+  </div>
+</div>
+<script>
+var faq = [
+  { keywords: ["delivery", "shipping", "how long", "arrive"], reply: "Delivery usually takes 4-5 days after your order is confirmed." },
+  { keywords: ["return", "refund", "exchange"], reply: "Returns and refunds follow the seller's policy (AliExpress or Amazon), since we link out to their store for the actual purchase." },
+  { keywords: ["payment", "cod", "cash on delivery", "pay"], reply: "Payment options depend on the seller's site — most support major cards and other standard checkout methods." },
+  { keywords: ["commission", "sponsored", "fake", "genuine", "real"], reply: "We use affiliate links, which means we may earn a small commission if you buy through them — at no extra cost to you. Every pick is still researched independently." },
+  { keywords: ["contact", "email", "phone", "reach"], reply: "You can reach us through the Contact page linked in the footer." },
+  { keywords: ["quality", "durable", "good"], reply: "We compare specs, price, and real buyer reviews before featuring any product, so quality is a key part of how picks are chosen." },
+  { keywords: ["about", "what is this", "who are you"], reply: "The Shortlist is a product-research site — we compare items across multiple options and link you to the best pick." }
+];
+function toggleChat(){
+  document.getElementById('chatBox').classList.toggle('open');
+  var msgBox = document.getElementById('chatMessages');
+  if(msgBox.children.length === 0){
+    addChatMsg("Hi! Ask me about delivery, returns, payment, or anything else.", "bot");
+  }
+}
+function addChatMsg(text, sender){
+  var msgBox = document.getElementById('chatMessages');
+  var div = document.createElement('div');
+  div.className = 'chatMsg ' + sender;
+  div.textContent = text;
+  msgBox.appendChild(div);
+  msgBox.scrollTop = msgBox.scrollHeight;
+}
+function sendChat(){
+  var input = document.getElementById('chatInput');
+  var text = input.value.trim();
+  if(!text) return;
+  addChatMsg(text, "user");
+  input.value = "";
+  setTimeout(function(){
+    var lower = text.toLowerCase();
+    var matched = faq.find(function(item){
+      return item.keywords.some(function(k){ return lower.includes(k); });
+    });
+    addChatMsg(matched ? matched.reply : "Sorry, I don't have an answer for that yet — try asking about delivery, returns, or payment.", "bot");
+  }, 500);
+}
+
+document.querySelectorAll('img.pick-img, .marquee-item img').forEach(function(img){
+  img.onerror = function(){
+    if(!this.dataset.retried){
+      this.dataset.retried = "1";
+      this.src = this.src.split('?')[0];
+    } else {
+      this.onerror = null;
+      this.src = 'https://placehold.co/220x220/f5f2ea/6b675c?text=Image+Unavailable';
+    }
+  };
+});
+</script>
+</body>
+</html>
