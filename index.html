@@ -1490,5 +1490,27 @@ function sendChat(){
   }, 500);
 }
 </script>
+  <script>
+document.querySelectorAll('.pick-footer .price').forEach(function(priceEl){
+  var timerDiv = document.createElement('div');
+  timerDiv.className = 'deal-timer';
+  timerDiv.innerHTML = 'Deal ends in <span class="timer-val">--:--:--</span>';
+  priceEl.insertAdjacentElement('afterend', timerDiv);
+});
+
+function updateTimers(){
+  var now = new Date();
+  var midnight = new Date(now);
+  midnight.setHours(24,0,0,0);
+  var diff = midnight - now;
+  var h = Math.floor(diff / 3600000);
+  var m = Math.floor((diff % 3600000) / 60000);
+  var s = Math.floor((diff % 60000) / 1000);
+  var text = h + 'h ' + (m<10?'0':'') + m + 'm ' + (s<10?'0':'') + s + 's';
+  document.querySelectorAll('.timer-val').forEach(function(el){ el.textContent = text; });
+}
+updateTimers();
+setInterval(updateTimers, 1000);
+</script>
 </body>
 </html>
