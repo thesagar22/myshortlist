@@ -1466,6 +1466,12 @@ function changePage(dir){
 }
 
 showPage();
+  window.addEventListener('load', function(){
+  setTimeout(function(){
+    document.getElementById('curtainLeft').classList.add('open');
+    document.getElementById('curtainRight').classList.add('open');
+  }, 600);
+});
   var faq = [
   { keywords: ["delivery", "shipping", "how long", "arrive"], reply: "Delivery usually takes 4-5 days after your order is confirmed." },
   { keywords: ["return", "refund", "exchange"], reply: "Returns and refunds follow the seller's policy (AliExpress or Amazon), since we link out to their store for the actual purchase." },
