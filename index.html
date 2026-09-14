@@ -158,6 +158,22 @@
 #chatInputRow{ display:flex; border-top:1px solid var(--line); }
 #chatInput{ flex:1; border:none; padding:10px; font-size:13.5px; outline:none; }
 #chatSend{ background:#1b3a2f; color:#fff; border:none; padding:0 14px; cursor:pointer; }
+  #curtainLeft, #curtainRight{
+  position:fixed; top:0; width:50%; height:100%; background:var(--ink);
+  z-index:99999; display:flex; align-items:center; justify-content:center;
+  transition:transform 1s ease-in-out;
+}
+#curtainLeft{ left:0; justify-content:flex-end; }
+#curtainRight{ right:0; justify-content:flex-start; }
+#curtainLeft.open{ transform:translateX(-100%); }
+#curtainRight.open{ transform:translateX(100%); }
+.curtain-text{
+  color:#fff; font-family:'Fraunces', serif; font-size:32px; font-weight:600;
+  letter-spacing:0.02em; padding:0 20px;
+}
+@media (max-width:800px){
+  .curtain-text{ font-size:22px; }
+}
 </style>
 </head>
 <body>
