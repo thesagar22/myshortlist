@@ -1560,5 +1560,35 @@ setInterval(updateTimers, 1000);
     <g class="wing"><path d="M23 23 C36 8, 48 10, 42 24 C 38 30, 28 28, 23 23 Z" fill="#B9862F" opacity="0.92"/><path d="M23 23 C33 26, 40 34, 33 40 C 28 40, 24 32, 23 23 Z" fill="#33635A" opacity="0.85"/></g>
   </svg>
 </div>
+  <script>
+document.querySelectorAll('.pick-card').forEach(function(card){
+  var name = card.querySelector('h3') ? card.querySelector('h3').textContent : '';
+  var price = card.querySelector('.price') ? card.querySelector('.price').textContent : '';
+  var link = card.querySelector('.cta-btn') ? card.querySelector('.cta-btn').href : '';
+  var footer = card.querySelector('.pick-footer');
+  if(!footer || !link) return;
+
+  var shareRow = document.createElement('div');
+  shareRow.className = 'share-row';
+
+  var waText = encodeURIComponent(name + ' — ' + price + '\n' + link);
+  var waBtn = document.createElement('a');
+  waBtn.className = 'share-btn share-whatsapp';
+  waBtn.href = 'https://wa.me/?text=' + waText;
+  waBtn.target = '_blank';
+  waBtn.innerHTML = 'WhatsApp';
+
+  var fbUrl = encodeURIComponent(link);
+  var fbBtn = document.createElement('a');
+  fbBtn.className = 'share-btn share-facebook';
+  fbBtn.href = 'https://www.facebook.com/sharer/sharer.php?u=' + fbUrl;
+  fbBtn.target = '_blank';
+  fbBtn.innerHTML = 'Facebook';
+
+  shareRow.appendChild(waBtn);
+  shareRow.appendChild(fbBtn);
+  footer.insertAdjacentElement('afterend', shareRow);
+});
+</script>
 </body>
 </html>
