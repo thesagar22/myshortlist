@@ -227,19 +227,31 @@
     </nav>
   </div>
 </header>
-
-<section class="hero">
-  <div class="wrap hero-grid">
-    <div>
-      <h1>We research it, compare it, and tell you if it's worth your money.</h1>
-      <p class="lede">Every pick on this site is researched against multiple alternatives — specs, price, and real buyer reviews — before it earns a place here. No sponsored placements, no filler picks.</p>
+<section>
+  <div class="wrap">
+    <div class="new-hero">
+      <span class="new-hero-badge">🏆 Top Picks</span>
+      <h1>The Best Products. <span class="accent">Handpicked</span> for You.</h1>
+      <p>We research it, compare it, and tell you if it's worth your money. No sponsored placements, no filler picks.</p>
+      <div class="new-hero-search">
+        <input type="text" id="siteSearch" placeholder="What are you looking for? (e.g. best headphones)" onkeyup="filterProducts()">
+        <button onclick="document.getElementById('picks').scrollIntoView({behavior:'smooth'})">Search</button>
+      </div>
+      <div class="popular-tags">
+        <span>wireless earbuds</span>
+        <span>smart watch</span>
+        <span>car accessories</span>
+      </div>
     </div>
-    <div class="hero-note">
-  <b>Find a product</b>
-  <input type="text" id="siteSearch" placeholder="Search products..." onkeyup="filterProducts()">
-</div>
-  </div>
 
+    <div class="trust-bar">
+      <div class="trust-item"><b>Expert Research</b>We do the hard work</div>
+      <div class="trust-item"><b>Price Comparison</b>Find the best deals</div>
+      <div class="trust-item"><b>Trusted Reviews</b>Real buyer feedback</div>
+      <div class="trust-item"><b>Updated Regularly</b>Fresh picks weekly</div>
+      <div class="trust-item"><b>Affiliate Disclosure</b>We may earn a commission</div>
+    </div>
+  </div>
 </section>
 <div class="product-marquee-container">
   <div class="product-marquee-track">
