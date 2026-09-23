@@ -24,213 +24,123 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --paper:#F4F7FB;
-    --ink:#101828;
-    --gold:#2563EB;
-    --teal:#1D4ED8;
-    --line:#E2E8F0;
-    --card:#FFFFFF;
-    --muted:#64748B;
-  }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  body{
-    background:var(--paper);
-    color:var(--ink);
-    font-family:'Inter', sans-serif;
-    line-height:1.5;
-  }
-  h1,h2,h3,.serif{ font-family:'Inter', sans-serif; font-weight:700; }
-  a{ color:inherit; text-decoration:none; }
-  .wrap{ max-width:1300px; margin:0 auto; padding:0 24px; }.pick-img{ width:100%; height:200px; object-fit:contain; border-radius:8px; margin-bottom:12px; display:block; background:#fff; }
-
-  /* Header */
-  header{
-    border-bottom:1px solid var(--line);
-    padding:16px 0 0;
-    background:#fff;
-  }
-  header .topbar{ display:flex; justify-content:space-between; align-items:center; gap:24px; padding-bottom:16px; }
-  .logo{ font-size:20px; font-weight:700; letter-spacing:-0.01em; white-space:nowrap; }
-  .logo span{ color:var(--gold); }
-  .header-search{ flex:1; max-width:520px; display:flex; border:1px solid var(--line); border-radius:8px; overflow:hidden; }
-  .header-search input{ flex:1; border:none; padding:10px 14px; font-size:14px; outline:none; }
-  .header-search button{ background:var(--gold); color:#fff; border:none; padding:0 18px; cursor:pointer; }
-  .header-actions{ display:flex; gap:22px; font-size:12px; color:var(--muted); }
-  .header-actions a{ display:flex; flex-direction:column; align-items:center; gap:2px; white-space:nowrap; }
-  .header-actions a b{ display:block; color:var(--ink); font-size:13px; font-weight:600; }
-  .catbar{ display:flex; gap:22px; font-size:13.5px; color:var(--muted); padding:10px 0; border-top:1px solid var(--line); overflow-x:auto; }
-  .catbar a:hover{ color:var(--ink); }
-  nav{ display:flex; gap:28px; font-size:14px; color:var(--muted); }
-  nav a:hover{ color:var(--ink); }
-  @media (max-width:800px){
-    .header-search, .header-actions{ display:none; }
-  }
-
-  /* Hero */
-  .hero{ padding:64px 0 48px; border-bottom:1px solid var(--line); }
-  .hero-grid{ display:grid; grid-template-columns:1.3fr 1fr; gap:48px; align-items:end; }
-  .hero h1{ font-size:52px; font-weight:600; line-height:1.05; letter-spacing:-0.015em; }
-  .hero p.lede{ margin-top:18px; font-size:17px; color:var(--muted); max-width:46ch; }
-  .hero-note{
-    border-left:2px solid var(--gold);
-    padding-left:18px;
-    font-size:14px;
-    color:var(--muted);
-  }
-  .hero-note b{ color:var(--ink); display:block; margin-bottom:4px; font-weight:600;}
-
-  /* Section headings */
-  .section-head{
-    display:flex; justify-content:space-between; align-items:baseline;
-    margin:56px 0 24px;
-  }
-  .section-head h2{ font-size:26px; font-weight:600; }
-  .section-head .count{ font-size:13px; color:var(--muted); }
-
-  /* Pick cards */
-  .picks{ display:grid; grid-template-columns:repeat(3, 1fr); gap:22px; }
-  .pick-card{
-    background:var(--card);
-    border:1px solid var(--line);
-    border-radius:12px;
-    padding:20px;
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-    box-shadow:0 1px 2px rgba(16,24,40,0.04);
-    transition:box-shadow 0.15s, transform 0.15s;
-  }
-  .pick-card:hover{ box-shadow:0 8px 20px rgba(16,24,40,0.10); transform:translateY(-2px); }
-  .pick-rank{ display:inline-block; font-size:11.5px; color:#fff; background:var(--gold); font-weight:700; padding:3px 10px; border-radius:20px; width:fit-content; }
-  .pick-card h3{ font-size:17px; font-weight:700; }
-  .pick-card .why{ font-size:13.5px; color:var(--muted); flex-grow:1; }
-  .stars{ font-size:13px; color:#F59E0B; letter-spacing:2px; }
-  .pick-footer{
-    display:flex; justify-content:space-between; align-items:center;
-    padding-top:10px; border-top:1px solid var(--line);
-  }
-  .price{ font-weight:600; }
-  .deal-timer{ font-size:11.5px; color:#c0392b; font-weight:600; margin-top:4px; }
-  .cta-btn{
-    background:var(--teal); color:#fff; font-size:13px; font-weight:600;
-    padding:9px 16px; border:none; border-radius:7px; cursor:pointer;
-  }
-  .cta-btn:hover{ background:#1e40af; }
-
-  /* Comparison table */
-  .compare-table{ width:100%; border-collapse:collapse; font-size:14px; }
-  .compare-table th, .compare-table td{
-    text-align:left; padding:14px 12px; border-bottom:1px solid var(--line);
-  }
-  .compare-table th{ color:var(--muted); font-weight:500; font-size:12.5px; }
-  .compare-table td.name{ font-weight:600; }
-  .compare-table .tag{
-    display:inline-block; font-size:11.5px; background:var(--paper);
-    border:1px solid var(--line); padding:2px 8px; color:var(--muted);
-  }
-
-  /* Categories */
-  .cats{ display:grid; grid-template-columns:repeat(4, 1fr); gap:14px; }
-  .cat{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:24px 20px; text-decoration:none; color:inherit; display:block; transition:box-shadow 0.15s, transform 0.15s; }
-  .cat:hover{ box-shadow:0 8px 20px rgba(16,24,40,0.08); transform:translateY(-2px); }
-  .cat h3{ font-size:16px; font-weight:700; margin-bottom:4px; }
-  .cat p{ font-size:13px; color:var(--muted); }
-.cat-icon{ width:36px; height:36px; margin-bottom:10px; stroke:var(--gold); }
-  /* Disclosure */
-  .disclosure{
-    margin-top:64px; padding:20px 0; border-top:1px solid var(--line);
-    font-size:13px; color:var(--muted); max-width:70ch;
-  }
-
-  footer{
-    margin-top:56px; border-top:1px solid var(--line);
-    padding:28px 0; font-size:13px; color:var(--muted);
-  }
-  footer .wrap{ display:flex; justify-content:space-between; }
-
-  @media (max-width:800px){
-    .hero-grid{ grid-template-columns:1fr; }
-    .hero h1{ font-size:36px; }
-    .picks{ grid-template-columns:1fr; }
-    .cats{ grid-template-columns:1fr 1fr; }
-    nav{ display:none; }
-    .compare-table{ display:block; overflow-x:auto; white-space:nowrap; }
-  }
-  .product-marquee-container{ overflow:hidden; padding:20px 0; margin:20px auto 0; max-width:1100px; }
-.product-marquee-track{ display:flex; gap:20px; width:max-content; animation:scrollInfinite 35s linear infinite; }
-.marquee-item{ flex:0 0 auto; width:140px; text-align:center; }
-.marquee-item img{ width:140px; height:140px; object-fit:contain; border-radius:8px; background:#fff; border:1px solid var(--line); display:block; }
-.marquee-item h4{ font-size:13px; margin-top:8px; font-weight:600; }
-@keyframes scrollInfinite{ 0%{ transform:translateX(0); } 100%{ transform:translateX(-50%); } }
-  #siteSearch{ width:100%; padding:10px 12px; margin-top:8px; border:1px solid var(--line); border-radius:6px; font-size:14px; }
-  #chatBubble{ position:fixed; bottom:20px; right:20px; width:56px; height:56px; border-radius:50%; background:#1b3a2f; color:#fff; display:flex; align-items:center; justify-content:center; font-size:26px; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,0.25); z-index:999; }
-#chatBox{ position:fixed; bottom:88px; right:20px; width:300px; max-height:400px; background:#fff; border:1px solid var(--line); border-radius:10px; box-shadow:0 6px 20px rgba(0,0,0,0.2); display:none; flex-direction:column; z-index:999; overflow:hidden; }
-#chatBox.open{ display:flex; }
-#chatHeader{ background:#1b3a2f; color:#fff; padding:12px 14px; font-weight:600; font-size:14px; }
-#chatMessages{ flex:1; padding:12px; overflow-y:auto; font-size:13.5px; }
-.chatMsg{ margin-bottom:10px; padding:8px 10px; border-radius:8px; max-width:85%; line-height:1.4; }
-.chatMsg.bot{ background:#f1efe8; align-self:flex-start; }
-.chatMsg.user{ background:#1b3a2f; color:#fff; align-self:flex-end; margin-left:auto; }
-#chatInputRow{ display:flex; border-top:1px solid var(--line); }
-#chatInput{ flex:1; border:none; padding:10px; font-size:13.5px; outline:none; }
-#chatSend{ background:#1b3a2f; color:#fff; border:none; padding:0 14px; cursor:pointer; }
-  #curtainLeft, #curtainRight{
-  position:fixed; top:0; width:50%; height:100%; background:var(--ink);
-  z-index:99999; display:flex; align-items:center; justify-content:center;
-  transition:transform 1s ease-in-out;
+:root{
+  --bg:#f6f8fb; --surface:#fff; --surface-2:#f8fafc; --ink:#10213a; --muted:#66758a;
+  --line:#e4eaf1; --blue:#1769e0; --blue-2:#0f56c7; --navy:#10233d; --green:#2fa66a;
+  --gold:#f5b21b; --shadow:0 8px 28px rgba(16,33,58,.07); --radius:14px;
 }
-#curtainLeft{ left:0; justify-content:flex-end; }
-#curtainRight{ right:0; justify-content:flex-start; }
-#curtainLeft.open{ transform:translateX(-100%); }
-#curtainRight.open{ transform:translateX(100%); }
-.curtain-text{
-  color:#fff; font-family:'Fraunces', serif; font-size:32px; font-weight:600;
-  letter-spacing:0.02em; padding:0 20px;
-}
-@media (max-width:800px){
-  .curtain-text{ font-size:22px; }
-}
-  .butterfly{ position:fixed; top:40%; left:0; width:46px; height:46px; z-index:500; pointer-events:none; filter:drop-shadow(0 0 6px rgba(185,134,47,0.45)); animation:flyPath 14s ease-in-out infinite; }
-.butterfly svg{ width:100%; height:100%; }
-.wing{ transform-origin:23px 23px; animation:flap 0.35s ease-in-out infinite alternate; }
-@keyframes flap{ 0%{ transform:scaleX(1); } 100%{ transform:scaleX(0.55); } }
-@keyframes flyPath{
-  0%{ top:40%; left:-5%; transform:rotate(0deg) translateY(0); }
-  20%{ top:15%; left:25%; transform:rotate(8deg) translateY(-10px); }
-  40%{ top:55%; left:50%; transform:rotate(-6deg) translateY(10px); }
-  60%{ top:20%; left:72%; transform:rotate(6deg) translateY(-8px); }
-  80%{ top:60%; left:90%; transform:rotate(-8deg) translateY(6px); }
-  100%{ top:40%; left:105%; transform:rotate(0deg) translateY(0); }
-}
-  .share-row{ display:flex; gap:8px; margin-top:8px; }
-.share-btn{ flex:1; display:flex; align-items:center; justify-content:center; gap:6px; padding:7px 0; border-radius:6px; font-size:12px; font-weight:600; text-decoration:none; cursor:pointer; }
-.share-whatsapp{ background:#25D366; color:#fff; }
-.share-facebook{ background:#1877F2; color:#fff; }
-.share-btn:hover{ opacity:0.9; }
-  .new-hero{ background:linear-gradient(135deg, #0F172A, #1D4ED8); border-radius:12px; padding:48px 40px; margin:24px 0; color:#fff; display:grid; grid-template-columns:1.4fr 1fr; gap:32px; align-items:center; }
-  .hero-visual{ display:flex; align-items:center; justify-content:center; }
-  .hero-visual svg{ width:100%; max-width:280px; height:auto; }
-  @media (max-width:900px){ .new-hero{ grid-template-columns:1fr; } .hero-visual{ display:none; } }
-.new-hero-badge{ display:inline-flex; align-items:center; gap:6px; background:rgba(255,255,255,0.15); padding:5px 12px; border-radius:20px; font-size:12px; font-weight:600; margin-bottom:16px; }
-.new-hero h1{ font-size:38px; color:#fff; max-width:520px; line-height:1.15; }
-.new-hero h1 .accent{ color:#B9862F; }
-.new-hero p{ margin-top:12px; color:#d8d4c8; font-size:15px; max-width:480px; }
-.new-hero-search{ display:flex; max-width:480px; margin-top:20px; background:#fff; border-radius:8px; overflow:hidden; }
-.new-hero-search input{ flex:1; border:none; padding:12px 16px; font-size:14px; outline:none; }
-.new-hero-search button{ background:var(--gold); color:#fff; border:none; padding:0 20px; font-weight:600; cursor:pointer; }
-.popular-tags{ display:flex; gap:8px; margin-top:14px; flex-wrap:wrap; }
-.popular-tags span{ background:rgba(255,255,255,0.12); color:#fff; font-size:12px; padding:5px 12px; border-radius:16px; }
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.45}
+a{color:inherit;text-decoration:none}.wrap{max-width:1450px;margin:0 auto;padding:0 28px}
+button,input,select{font:inherit}
 
-.trust-bar{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:16px; padding:20px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); margin:24px 0; }
-.trust-item{ display:flex; align-items:center; gap:8px; font-size:12.5px; color:var(--muted); }
-.trust-item b{ color:var(--ink); display:block; font-size:13px; }
-.trust-icon{ width:26px; height:26px; flex-shrink:0; }
+/* Header */
+header{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);box-shadow:0 2px 10px rgba(16,33,58,.03)}
+.topbar{min-height:70px;display:grid;grid-template-columns:270px minmax(300px,1fr) 390px;gap:26px;align-items:center}
+.logo img{width:180px;height:auto;display:block;object-fit:contain}
+.header-search{height:44px;display:flex;border:1px solid #d7e0ea;border-radius:11px;background:#fff;overflow:hidden;box-shadow:0 1px 3px rgba(16,33,58,.03)}
+.header-search input{flex:1;border:0;outline:0;padding:0 16px;color:var(--ink);font-size:13px}.header-search button{width:52px;border:0;background:var(--blue);color:#fff;cursor:pointer;font-size:18px}.header-search button:hover{background:var(--blue-2)}
+.header-actions{display:flex;justify-content:flex-end;gap:20px;color:var(--muted)}
+.header-actions a{display:flex;align-items:center;gap:8px;font-size:10px;min-width:92px}.header-actions a::before{font-size:20px}.header-actions a:nth-child(1)::before{content:'♧';color:var(--blue)}.header-actions a:nth-child(2)::before{content:'♡';color:var(--blue)}.header-actions a:nth-child(3)::before{content:'◉';color:var(--blue)}
+.header-actions a b{display:block;color:var(--ink);font-size:12px;font-weight:700}.header-actions a{flex-direction:column;gap:0;text-align:center}.header-actions a::before{display:block;margin-bottom:1px}
+.catbar{display:flex;gap:28px;align-items:center;height:43px;border-top:1px solid #eef2f6;overflow-x:auto;white-space:nowrap;font-size:12px;color:#34455c}.catbar::-webkit-scrollbar{height:0}.catbar a{padding:7px 0}.catbar a:hover{color:var(--blue)}
 
-@media (max-width:800px){
-  .new-hero h1{ font-size:26px; }
-  .trust-bar{ flex-direction:column; }
+/* Hero */
+.hero-shell{padding:18px 0 4px}.hero-layout{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:16px;align-items:stretch}
+.new-hero{position:relative;min-height:330px;overflow:hidden;border-radius:14px;background:linear-gradient(110deg,#0e1e32 0%,#173a61 54%,#d8e4ea 100%);padding:40px 36px;color:#fff;box-shadow:var(--shadow);display:flex;align-items:center}
+.new-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,19,34,.18),transparent 65%);pointer-events:none}
+.hero-copy{position:relative;z-index:2;max-width:570px}.new-hero-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2);padding:6px 12px;border-radius:20px;font-size:11px;font-weight:700;margin-bottom:14px}
+.new-hero h1{font-size:38px;line-height:1.08;letter-spacing:-.8px;color:#fff}.new-hero h1 .accent{color:#2d7df2}.new-hero p{margin-top:12px;color:#e4edf7;font-size:14px;max-width:420px}
+.new-hero-search{display:flex;max-width:520px;margin-top:19px;background:#fff;border-radius:10px;overflow:hidden;padding:4px}.new-hero-search input{flex:1;border:0;outline:0;padding:10px 13px;font-size:12px;min-width:0}.new-hero-search button{border:0;background:var(--blue);color:#fff;border-radius:7px;padding:0 25px;font-weight:700;font-size:12px;cursor:pointer}.new-hero-search button:hover{background:var(--blue-2)}
+.popular-tags{display:flex;gap:7px;margin-top:12px;flex-wrap:wrap}.popular-tags span{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.14);color:#fff;font-size:10px;padding:5px 9px;border-radius:14px}
+.hero-visual{position:absolute;right:18px;top:0;bottom:0;width:54%;display:flex;align-items:center;justify-content:center;z-index:1}.hero-visual::before{content:'';position:absolute;width:440px;height:270px;right:10px;background:radial-gradient(circle at 50% 50%,rgba(255,255,255,.35),transparent 64%)}
+.hero-product{position:absolute;background:#fff;border-radius:12px;padding:8px;box-shadow:0 18px 40px rgba(0,0,0,.22);transform:rotate(-7deg);width:145px}.hero-product img{width:100%;height:110px;object-fit:contain;border-radius:8px;background:#f5f7fa}.hero-product.one{right:275px;top:55px}.hero-product.two{right:125px;top:35px;transform:rotate(4deg);width:175px}.hero-product.three{right:185px;bottom:25px;transform:rotate(-1deg);width:145px}.hero-product small{display:block;color:#22344d;font-weight:700;font-size:9px;padding:6px 3px 1px}
+
+/* Finder sidebar */
+.side-stack{display:flex;flex-direction:column;gap:12px}.side-card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:15px;box-shadow:0 3px 12px rgba(16,33,58,.04)}
+/* Compact professional Product Finder card */
+.finder-card{
+  position:relative;
+  min-height:0;
+  padding:14px 15px 15px !important;
+  border:1px solid #dbe8f6 !important;
+  border-left:3px solid var(--blue) !important;
+  border-radius:12px !important;
+  background:linear-gradient(145deg,#ffffff 0%,#f5f9ff 100%);
+  box-shadow:0 5px 18px rgba(37,99,235,.07);
+  overflow:hidden;
 }
+.finder-card:before{
+  content:"";
+  position:absolute;
+  width:78px;height:78px;
+  right:-28px;top:-30px;
+  border-radius:50%;
+  background:rgba(37,99,235,.07);
+}
+.finder-card h3{position:relative;font-size:13px !important;line-height:1.25}
+.finder-card p{position:relative;font-size:10px !important;line-height:1.45;margin-top:5px !important;max-width:250px}
+.finder-card .side-btn{
+  position:relative;
+  margin-top:10px !important;
+  padding:8px 12px !important;
+  border-radius:7px !important;
+  font-size:10px !important;
+  box-shadow:0 3px 8px rgba(37,99,235,.14);
+}.side-card h3{font-size:14px}.side-card p{font-size:11px;color:var(--muted);margin-top:4px}.finder-card .side-btn{margin-top:12px}.side-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--blue);color:#fff;border:0;border-radius:8px;padding:9px 14px;font-size:11px;font-weight:700;cursor:pointer}.side-btn.secondary{background:#fff;color:var(--blue);border:1px solid #9fc1f3}
+.side-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px}.side-title a{font-size:9px;color:var(--blue);font-weight:700}.shortlist-items{display:flex;flex-direction:column}.short-item{display:grid;grid-template-columns:46px 1fr auto;gap:8px;align-items:center;padding:8px 0;border-top:1px solid var(--line)}.short-item:first-child{border-top:0}.short-item img{width:46px;height:42px;object-fit:contain;border:1px solid var(--line);border-radius:7px;background:#fff}.short-item b{font-size:10px;line-height:1.25;display:block}.short-item span{font-size:10px;font-weight:800;margin-top:2px;display:block}.short-item .mini-heart{color:#e53958;font-size:16px}.mini-label{display:inline-block;background:#e8f3ff;color:var(--blue);font-size:8px;padding:2px 5px;border-radius:9px;margin-top:3px}
+.side-action{display:flex;justify-content:space-between;align-items:center;gap:8px}.side-action .side-btn{padding:7px 10px;background:#fff;color:var(--blue);border:1px solid #9fc1f3}.side-action .side-btn:hover{background:#eef6ff}
+.newsletter input{width:100%;height:31px;border:1px solid var(--line);border-radius:7px;padding:0 9px;font-size:10px;margin-top:9px}.newsletter button{width:100%;margin-top:7px;height:30px}
+.quick-links{display:grid;grid-template-columns:1fr 1fr;gap:8px}.quick-links a{border:1px solid var(--line);border-radius:8px;padding:9px;font-size:10px;background:#fff}.quick-links a b{display:block;font-size:10px}.quick-links a span{color:var(--muted);font-size:8px}
+
+/* Sections */
+.main-content{padding-top:10px}.content-grid{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:18px;align-items:start}.primary-column{min-width:0}
+.section-head{display:flex;justify-content:space-between;align-items:end;margin:22px 0 12px}.section-head h2{font-size:20px;letter-spacing:-.25px}.section-head .count{font-size:10px;color:var(--muted)}
+/* Product row: ONLY this area scrolls horizontally */
+.picks{
+  display:flex;
+  flex-wrap:nowrap;
+  gap:12px;
+  overflow-x:auto;
+  overflow-y:hidden;
+  padding:3px 2px 12px;
+  scroll-snap-type:x proximity;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:thin;
+}
+.picks::-webkit-scrollbar{height:7px}
+.picks::-webkit-scrollbar-track{background:#edf2f7;border-radius:99px}
+.picks::-webkit-scrollbar-thumb{background:#b8c7d9;border-radius:99px}
+.pick-card{position:relative;flex:0 0 235px;scroll-snap-align:start;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:6px;box-shadow:0 2px 8px rgba(16,33,58,.03);transition:.18s ease;min-width:0}.pick-card:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(16,33,58,.10)}
+.pick-img{width:100%;height:150px;object-fit:contain;border-radius:9px;background:#f7f9fc;display:block;margin-bottom:2px}.pick-rank{display:inline-block;width:max-content;font-size:8px;color:#fff;background:var(--blue);font-weight:800;padding:4px 7px;border-radius:6px}.pick-card h3{font-size:11px;line-height:1.3;font-weight:750;min-height:29px}.pick-card .why{font-size:9px;color:var(--muted);line-height:1.4;min-height:38px}.stars{font-size:10px;color:#f2a900;letter-spacing:1px}.pick-footer{display:flex;justify-content:space-between;align-items:center;padding-top:6px;border-top:1px solid var(--line);margin-top:auto;gap:6px}.price{font-weight:800;font-size:12px}.deal-timer{font-size:8px;color:#e05b4f;font-weight:700;margin-top:0}.cta-btn{display:inline-flex;align-items:center;justify-content:center;background:#fff;color:var(--blue);border:1px solid #9fc1f3;font-size:9px;font-weight:800;padding:7px 9px;border-radius:6px;cursor:pointer}.cta-btn:hover{background:#eef6ff}.share-row{display:none}
+.save-product,.compare-product{position:absolute;top:9px;width:27px;height:27px;border-radius:50%;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:3}.save-product{right:9px;color:#7b8797}.compare-product{right:41px;color:#7b8797;font-size:11px}.save-product.saved{color:#e53958;background:#fff0f3}.compare-product.selected{color:var(--blue);background:#eef6ff;border-color:#9fc1f3}
+
+/* Category cards */
+.category-strip{display:grid;grid-template-columns:repeat(8,minmax(90px,1fr));gap:8px}.cat{background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px;text-align:center;transition:.18s ease}.cat:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:#c9d8ea}.cat img{width:100%;height:70px;object-fit:contain;background:#f7f9fc;border-radius:7px}.cat h3{font-size:9px;margin-top:6px}.cat p{display:none}.cat-icon{display:none}
+
+/* Marquee */
+.product-marquee-container{display:none;overflow:hidden;padding:12px 0;margin:6px auto 0;max-width:1450px}.product-marquee-track{display:flex;gap:10px;width:max-content;animation:scrollInfinite 42s linear infinite}.marquee-item{width:96px;text-align:center}.marquee-item img{width:96px;height:78px;object-fit:contain;border-radius:8px;background:#fff;border:1px solid var(--line);display:block}.marquee-item h4{font-size:8px;margin-top:5px;font-weight:700;color:var(--muted)}
+@keyframes scrollInfinite{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+.trust-bar-new{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:14px 0 4px;background:#fff;border:1px solid var(--line);border-radius:11px;padding:10px}.trust-bar-new>div{display:flex;align-items:center;justify-content:center;gap:7px;border-right:1px solid var(--line);font-size:8px;color:var(--muted)}.trust-bar-new>div:last-child{border-right:0}.trust-bar-new b{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#edf5ff;color:var(--blue);font-size:12px}.trust-bar-new strong{display:block;color:var(--ink);font-size:9px}@media(max-width:900px){.trust-bar-new{grid-template-columns:repeat(2,1fr)}.trust-bar-new>div:nth-child(2n){border-right:0}}@media(max-width:620px){.trust-bar-new{grid-template-columns:1fr}.trust-bar-new>div{justify-content:flex-start;border-right:0;border-bottom:1px solid var(--line);padding:4px 0}.trust-bar-new>div:last-child{border-bottom:0}}
+/* Compare / disclosure */
+.compare-table{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:11px}.compare-table th,.compare-table td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line)}.compare-table th{background:#f8fafc;color:var(--muted);font-weight:700;font-size:9px}.compare-table td.name{font-weight:700}.compare-table .tag{display:inline-block;font-size:8px;background:#edf5ff;border:1px solid #d7e7fa;padding:3px 6px;color:var(--blue);border-radius:10px}.disclosure{margin-top:28px;padding:14px 0;border-top:1px solid var(--line);font-size:10px;color:var(--muted);max-width:90ch}
+
+/* Footer */
+footer{margin-top:34px;background:#0d2038;color:#d9e2ee;padding:24px 0;font-size:10px}footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px}footer a{color:#fff;margin-left:14px}footer a:hover{color:#72a8ff}
+
+/* Chat + modal */
+#chatBubble{position:fixed;bottom:20px;right:20px;width:50px;height:50px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;box-shadow:0 8px 20px rgba(23,105,224,.3);z-index:999}.chatMsg{font-size:12px}
+#chatBox{position:fixed;bottom:82px;right:20px;width:310px;max-height:410px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 16px 45px rgba(16,33,58,.18);display:none;flex-direction:column;z-index:999;overflow:hidden}#chatBox.open{display:flex}#chatHeader{background:var(--navy);color:#fff;padding:12px 14px;font-weight:700;font-size:12px}#chatMessages{flex:1;padding:12px;overflow-y:auto}#chatInputRow{display:flex;border-top:1px solid var(--line)}#chatInput{flex:1;border:0;padding:10px;font-size:12px;outline:0}#chatSend{background:var(--blue);color:#fff;border:0;padding:0 14px;cursor:pointer}
+#finderModal{position:fixed;inset:0;background:rgba(10,25,45,.48);display:none;align-items:center;justify-content:center;z-index:2000;padding:18px}#finderModal.open{display:flex}.finder-modal-card{background:#fff;width:min(520px,100%);border-radius:16px;padding:22px;box-shadow:0 25px 70px rgba(0,0,0,.22)}.finder-modal-card h2{font-size:20px}.finder-modal-card p{font-size:11px;color:var(--muted);margin:5px 0 15px}.finder-form{display:grid;gap:11px}.finder-form label{font-size:10px;font-weight:700;color:#30445e}.finder-form select{width:100%;height:38px;border:1px solid var(--line);border-radius:8px;padding:0 10px;font-size:11px;background:#fff}.finder-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}.finder-actions button{border-radius:8px;padding:9px 13px;border:1px solid var(--line);background:#fff;font-size:11px;cursor:pointer}.finder-actions .primary{background:var(--blue);color:#fff;border-color:var(--blue)}
+
+/* Remove older decorative effects from the original version */
+#curtainLeft,#curtainRight,.butterfly{display:none!important}.new-hero-search + .popular-tags{position:relative}
+
+@media(max-width:1200px){.topbar{grid-template-columns:220px 1fr 310px}.header-actions{gap:8px}.content-grid{grid-template-columns:1fr 300px}.picks{grid-template-columns:repeat(3,minmax(0,1fr))}.category-strip{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:900px){.wrap{padding:0 16px}.topbar{grid-template-columns:170px 1fr;gap:14px}.header-actions{display:none}.logo img{width:160px}.hero-layout,.content-grid{grid-template-columns:1fr}.side-stack{display:grid;grid-template-columns:1fr 1fr}.finder-card{grid-column:1/-1}.hero-visual{opacity:.35;width:65%}.picks{grid-template-columns:repeat(2,minmax(0,1fr))}.category-strip{grid-template-columns:repeat(4,1fr)}.catbar{gap:18px}}
+@media(max-width:620px){.wrap{padding:0 12px}.topbar{grid-template-columns:1fr}.header-search{display:none}.catbar{height:39px;font-size:10px}.new-hero{min-height:380px;padding:28px 22px}.new-hero h1{font-size:31px}.hero-visual{display:none}.picks{grid-template-columns:1fr 1fr;gap:8px}.pick-img{height:120px}.pick-card{padding:8px;flex-basis:190px}.pick-card h3{font-size:10px}.pick-card .why{font-size:8px}.category-strip{grid-template-columns:repeat(2,1fr)}.side-stack{grid-template-columns:1fr}.finder-card{grid-column:auto}.section-head{margin-top:18px}.section-head h2{font-size:18px}.compare-table{display:block;overflow-x:auto;white-space:nowrap}.product-marquee-container{display:none}footer .wrap{flex-direction:column;align-items:flex-start}}
 </style>
 </head>
 <body>
@@ -239,86 +149,63 @@
 
 <header>
   <div class="wrap topbar">
-    <div class="logo"><img src="logo.png" alt="The Shortlist" style="height:34px; display:block;"></div>
+    <a class="logo" href="index.html" aria-label="The Shortlist home"><img src="logo.png" alt="The Shortlist"></a>
     <div class="header-search">
       <input type="text" id="headerSearch" placeholder="Search products, categories, or ask a question..." onkeyup="document.getElementById('siteSearch').value=this.value; filterProducts();">
-      <button onclick="document.getElementById('picks').scrollIntoView({behavior:'smooth'})">🔍</button>
+      <button aria-label="Search" onclick="document.getElementById('picks').scrollIntoView({behavior:'smooth'})">⌕</button>
     </div>
     <div class="header-actions">
-      <a href="#categories"><b>Product Finder</b>Browse by category</a>
-      <a href="#picks"><b>This Week's Picks</b>Top picks</a>
-      <a href="#compare"><b>Compare</b>Head-to-head</a>
+      <a href="#finder" onclick="openFinder();return false;"><b>Product Finder</b><span>Let us help you choose</span></a>
+      <a href="#shortlist"><b>My Shortlist</b><span>Saved products</span></a>
+      <a href="#compare"><b>Compare</b><span>Compare products</span></a>
     </div>
   </div>
   <div class="wrap catbar">
-    <a href="home-kitchen.html">🏠 Home &amp; Kitchen</a>
-    <a href="tech-gadgets.html">💻 Tech &amp; Gadgets</a>
-    <a href="auto-accessories.html">🚗 Auto Accessories</a>
-    <a href="fashion-jewelry.html">💎 Fashion &amp; Jewelry</a>
-    <a href="kids-family.html">🧒 Kids &amp; Family</a>
-    <a href="beauty-personal-care.html">✨ Beauty &amp; Personal Care</a>
-    <a href="security-safety.html">🛡️ Security &amp; Safety</a>
-    <a href="outdoor-sports.html">🏕️ Outdoor &amp; Sports</a>
+    <a href="#categories">▦ &nbsp;All Categories</a>
+    <a href="tech-gadgets.html">▣ &nbsp;Tech</a><a href="fashion-jewelry.html">♟ &nbsp;Fashion</a><a href="home-kitchen.html">⌂ &nbsp;Home</a>
+    <a href="beauty-personal-care.html">♟ &nbsp;Beauty</a><a href="auto-accessories.html">▰ &nbsp;Auto</a><a href="outdoor-sports.html">✈ &nbsp;Travel</a><a href="kids-family.html">● &nbsp;Gaming</a><a href="security-safety.html">▤ &nbsp;Office</a>
   </div>
 </header>
-<section>
-  <div class="wrap">
+<section class="hero-shell">
+  <div class="wrap hero-layout">
     <div class="new-hero">
-      <span class="new-hero-badge">🏆 Top Picks</span>
-      <h1>The Best Products. <span class="accent">Handpicked</span> for You.</h1>
-      <p>We research it, compare it, and tell you if it's worth your money. No sponsored placements, no filler picks.</p>
-      <div class="new-hero-search">
-        <input type="text" id="siteSearch" placeholder="What are you looking for? (e.g. best headphones)" onkeyup="filterProducts()">
-        <button onclick="document.getElementById('picks').scrollIntoView({behavior:'smooth'})">Search</button>
+      <div class="hero-copy">
+        <span class="new-hero-badge">♛ &nbsp;Top Picks</span>
+        <h1>The Best <span class="accent">Products.</span><br><span class="accent">Handpicked</span> for You.</h1>
+        <p>We research. We compare. We shortlist. So you don't have to.</p>
+        <div class="new-hero-search"><input type="text" id="siteSearch" placeholder="What are you looking for? (e.g. best laptop for students)" onkeyup="filterProducts()"><button onclick="document.getElementById('picks').scrollIntoView({behavior:'smooth'})">Search&nbsp; →</button></div>
+        <div class="popular-tags"><span>wireless headphones</span><span>best laptop under $1000</span><span>travel backpack</span></div>
       </div>
-      <div class="popular-tags">
-        <span>wireless earbuds</span>
-        <span>smart watch</span>
-        <span>car accessories</span>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hero-product one"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Se33b2e1f0eb44d208ef2807472d52618W.jpg_220x220q75.jpg_.avif" alt=""><small>Wireless Audio</small></div>
+        <div class="hero-product two"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S5393f42d569e4d0d903d05c520d75a01O.jpg_220x220q75.jpg_.avif" alt=""><small>Work Essential</small></div>
+        <div class="hero-product three"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S417262a33df144789b49236a5aedfe192.jpg_220x220q75.jpg_.avif" alt=""><small>Smart Tech</small></div>
       </div>
-    <div class="hero-visual">
-      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="100" cy="100" r="95" fill="rgba(255,255,255,0.08)"/>
-        <rect x="45" y="70" width="110" height="70" rx="8" fill="rgba(255,255,255,0.18)"/>
-        <rect x="55" y="80" width="90" height="50" rx="4" fill="rgba(255,255,255,0.35)"/>
-        <circle cx="150" cy="55" r="22" fill="rgba(255,255,255,0.22)"/>
-        <path d="M138 55 a12 12 0 1 1 24 0 a12 12 0 1 1 -24 0" stroke="#fff" stroke-width="3" fill="none"/>
-        <rect x="30" y="140" width="35" height="35" rx="6" fill="rgba(255,255,255,0.22)"/>
-      </svg>
     </div>
-    </div>
-
-    <div class="trust-bar">
-      <div class="trust-item"><b>Expert Research</b>We do the hard work</div>
-      <div class="trust-item"><b>Price Comparison</b>Find the best deals</div>
-      <div class="trust-item"><b>Trusted Reviews</b>Real buyer feedback</div>
-      <div class="trust-item"><b>Updated Regularly</b>Fresh picks weekly</div>
-      <div class="trust-item"><b>Affiliate Disclosure</b>We may earn a commission</div>
-    </div>
-
-    <div class="section-head">
-      <h2>Popular Categories</h2>
-    </div>
-    <div class="cats">
-      <a href="home-kitchen.html" class="cat">
-        <svg class="cat-icon" viewBox="0 0 48 48" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20 L24 6 L44 20"/><path d="M10 18 V42 H38 V18"/><path d="M18 42 V30 H30 V42"/></svg>
-        <h3>Home &amp; Kitchen</h3><p>Everyday gear worth the counter space.</p>
-      </a>
-      <a href="tech-gadgets.html" class="cat">
-        <svg class="cat-icon" viewBox="0 0 48 48" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="40" height="28" rx="3"/><path d="M16 42 H32"/><path d="M24 34 V42"/><rect x="14" y="14" width="20" height="12" rx="1"/></svg>
-        <h3>Tech &amp; Gadgets</h3><p>What's actually useful, not just new.</p>
-      </a>
-      <a href="auto-accessories.html" class="cat">
-        <svg class="cat-icon" viewBox="0 0 48 48" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 28 L11 14 H37 L42 28"/><rect x="3" y="28" width="42" height="12" rx="3"/><circle cx="13" cy="42" r="4"/><circle cx="35" cy="42" r="4"/></svg>
-        <h3>Auto Accessories</h3><p>Upgrades and essentials for your car.</p>
-      </a>
-      <a href="fashion-jewelry.html" class="cat">
-        <svg class="cat-icon" viewBox="0 0 48 48" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8 H36 L44 20 L24 44 L4 20 Z"/><path d="M4 20 H44"/><path d="M18 8 L24 20 L30 8"/></svg>
-        <h3>Fashion &amp; Jewelry</h3><p>Style picks that don't feel disposable.</p>
-      </a>
-    </div>
+    <aside class="side-stack" id="finder">
+      <div class="side-card finder-card"><h3>Not sure what to buy?</h3><p>Answer a few quick questions and get your personalized shortlist.</p><button class="side-btn" onclick="openFinder()">Start Product Finder&nbsp; →</button></div>
+      <div class="side-card" id="shortlist"><div class="side-title"><h3>Your Shortlist</h3><a href="#shortlist">View all →</a></div><div class="shortlist-items" id="shortlistItems"></div></div>
+      <div class="side-card"><div class="side-title"><h3>Compare Products</h3></div><p>Compare 2–4 products side by side.</p><div class="side-action" style="margin-top:10px"><span id="compareCount" style="font-size:10px;color:var(--muted)">0 selected</span><a href="#compare" class="side-btn">Compare Now&nbsp; ↗</a></div></div>
+      <div class="side-card"><div class="side-title"><h3>Price Alert</h3></div><p>Track price drops and get notified.</p><div class="side-action" style="margin-top:10px"><span style="font-size:10px;color:var(--muted)">Free alerts</span><button class="side-btn" onclick="alert('Price alerts are ready for the next update.')">Set Alert&nbsp; ♧</button></div></div>
+      <div class="side-card newsletter"><div class="side-title"><h3>Newsletter</h3></div><p>Get the latest picks, deals and guides.</p><input type="email" placeholder="Enter your email address"><button class="side-btn">Subscribe&nbsp; →</button></div>
+      <div class="side-card"><div class="side-title"><h3>Quick Links</h3></div><div class="quick-links"><a href="about.html"><b>♡ &nbsp;About Us</b><span>Our story</span></a><a href="privacy.html"><b>♧ &nbsp;FAQ</b><span>Need help?</span></a><a href="contact.html"><b>◉ &nbsp;Contact</b><span>Get in touch</span></a><a href="#compare"><b>▤ &nbsp;Blog</b><span>Guides & more</span></a></div></div>
+    </aside>
   </div>
 </section>
+
+<div class="wrap" id="categories">
+  <div class="section-head"><h2>Popular Categories</h2><a href="#categories" style="font-size:10px;color:var(--blue);font-weight:700">View all categories →</a></div>
+  <div class="category-strip">
+    <a href="tech-gadgets.html" class="cat"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S5393f42d569e4d0d903d05c520d75a01O.jpg_220x220q75.jpg_.avif" alt="Tech"><h3>Tech</h3></a>
+    <a href="fashion-jewelry.html" class="cat"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sd01d3f9618324fc4b1c2cc6a8ed8485eg.jpg_220x220q75.jpg_.avif" alt="Fashion"><h3>Fashion</h3></a>
+    <a href="home-kitchen.html" class="cat"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sb427b3e9d73345b6bc6b294a00eca62dQ.jpg_220x220q75.jpg_.avif" alt="Home"><h3>Home</h3></a>
+    <a href="beauty-personal-care.html" class="cat"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S901897e869d14a2caed892db878ef5acm.jpg?has_lang=1&ver=1_220x220q75.jpg_.avif" alt="Beauty"><h3>Beauty</h3></a>
+    <a href="auto-accessories.html" class="cat"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S85c3a32e728c45e9a4abaf74b929e3f3I.jpg" alt="Auto"><h3>Auto</h3></a>
+    <a href="outdoor-sports.html" class="cat"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S7d0c550b40fe453792f5f0eb416f3a76o.jpg_220x220q75.jpg_.avif" alt="Travel"><h3>Travel</h3></a>
+    <a href="kids-family.html" class="cat"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S3323ff9d1dcf4580957c2c4e83bca83ai.jpg_220x220q75.jpg_.avif" alt="Gaming"><h3>Gaming</h3></a>
+    <a href="security-safety.html" class="cat"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S14e1f169c71e4416b663527519606e06M.jpg" alt="Office"><h3>Office</h3></a>
+  </div>
+</div>
 <div class="product-marquee-container">
   <div class="product-marquee-track">
     <div class="marquee-item"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Se33b2e1f0eb44d208ef2807472d52618W.jpg_220x220q75.jpg_.avif" alt="Pro Wireless Earbuds X1"><h4>Wireless Earbuds</h4></div>
@@ -344,13 +231,10 @@
     <div class="marquee-item"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sb427b3e9d73345b6bc6b294a00eca62dQ.jpg_220x220q75.jpg_.avif" alt="Retro European-Style Area Rug"><h4>Area Rug</h4></div>
   </div>
 </div>
-  <div class="wrap">
-
-  <div class="section-head" id="picks">
-    <h2>This Week's Picks</h2>
-    <div class="count">100 of 110+ products reviewed</div>
-  </div>
-
+<div class="wrap main-content">
+  <div class="content-grid">
+    <div class="primary-column">
+      <div class="section-head" id="picks"><h2>Today's Shortlists</h2><div class="count">Top picks, best deals and trending products — all in one place.</div></div>
   <div class="picks">
     <div class="pick-card"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Se33b2e1f0eb44d208ef2807472d52618W.jpg_220x220q75.jpg_.avif" alt="Pro Wireless Earbuds X1" class="pick-img">
       <div class="pick-rank">Best Overall</div>
@@ -1439,7 +1323,11 @@
     <a href="https://s.click.aliexpress.com/e/_c3OYCCPT" class="cta-btn">View Deal →</a>
   </div>
 </div>
+  </div
+    </div>
+    </div>
   </div>
+  <div class="trust-bar-new"><div><b>◉</b><span><strong>Expert Research</strong>We do the hard work</span></div><div><b>⌁</b><span><strong>Price Comparison</strong>Find better deals</span></div><div><b>♡</b><span><strong>Trusted Reviews</strong>Real buyer feedback</span></div><div><b>↻</b><span><strong>Updated Regularly</strong>Fresh picks and prices</span></div><div><b>↗</b><span><strong>Affiliate Disclosure</strong>We may earn a commission</span></div></div>
   <div class="section-head" id="compare">
     <h2>Head-to-Head</h2>
     <div class="count">Updated Sep 2026</div>
@@ -1494,49 +1382,12 @@
   <span id="pageInfo" style="align-self:center; font-size:13px; color:var(--muted);"></span>
   <button id="nextPage" onclick="changePage(1)" class="cta-btn">Next →</button>
 </div> 
-   <div class="section-head" id="categories">
-  <h2>Browse by Category</h2>
-</div>
-
-<div class="cats">
-  <a href="home-kitchen.html" class="cat">
-    <svg class="cat-icon" viewBox="0 0 48 48" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20 L24 6 L44 20"/><path d="M10 18 V42 H38 V18"/><path d="M18 42 V30 H30 V42"/></svg>
-    <h3>Home &amp; Kitchen</h3><p>Everyday gear worth the counter space.</p>
-  </a>
-  <a href="tech-gadgets.html" class="cat">
-    <svg class="cat-icon" viewBox="0 0 48 48" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="40" height="28" rx="3"/><path d="M16 42 H32"/><path d="M24 34 V42"/><rect x="14" y="14" width="20" height="12" rx="1"/></svg>
-    <h3>Tech &amp; Gadgets</h3><p>What's actually useful, not just new.</p>
-  </a>
-  <a href="auto-accessories.html" class="cat">
-    <svg class="cat-icon" viewBox="0 0 48 48" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 28 L11 14 H37 L42 28"/><rect x="3" y="28" width="42" height="12" rx="3"/><circle cx="13" cy="42" r="4"/><circle cx="35" cy="42" r="4"/></svg>
-    <h3>Auto Accessories</h3><p>Upgrades and essentials for your car.</p>
-  </a>
-  <a href="fashion-jewelry.html" class="cat">
-    <svg class="cat-icon" viewBox="0 0 48 48" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8 H36 L44 20 L24 44 L4 20 Z"/><path d="M4 20 H44"/><path d="M18 8 L24 20 L30 8"/></svg>
-    <h3>Fashion &amp; Jewelry</h3><p>Style picks that don't feel disposable.</p>
-  </a>
-  <a href="kids-family.html" class="cat">
-    <svg class="cat-icon" viewBox="0 0 48 48" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="10" r="5"/><circle cx="32" cy="10" r="5"/><circle cx="24" cy="24" r="15"/><circle cx="19" cy="22" r="1.6" fill="#B9862F"/><circle cx="29" cy="22" r="1.6" fill="#B9862F"/><path d="M20 29 Q24 33 28 29"/></svg>
-    <h3>Kids &amp; Family</h3><p>Gear built to survive real kids.</p>
-  </a>
-  <a href="beauty-personal-care.html" class="cat">
-    <svg class="cat-icon" viewBox="0 0 48 48" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M24 4 L27 18 L41 21 L27 24 L24 38 L21 24 L7 21 L21 18 Z"/><path d="M38 30 L39.5 34 L43.5 35.5 L39.5 37 L38 41 L36.5 37 L32.5 35.5 L36.5 34 Z"/></svg>
-    <h3>Beauty &amp; Personal Care</h3><p>Self-care essentials worth the shelf space.</p>
-  </a>
-  <a href="security-safety.html" class="cat">
-    <svg class="cat-icon" viewBox="0 0 48 48" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M24 4 L42 11 V24 C42 36 34 42 24 46 C14 42 6 36 6 24 V11 Z"/><path d="M16 24 L21 30 L33 17"/></svg>
-    <h3>Security &amp; Safety</h3><p>Peace of mind for home and family.</p>
-  </a>
-  <a href="outdoor-sports.html" class="cat">
-    <svg class="cat-icon" viewBox="0 0 48 48" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="5"/><path d="M2 40 L16 20 L24 30 L34 14 L46 40 Z"/></svg>
-    <h3>Outdoor &amp; Sports</h3><p>Equipment that survives past January.</p>
-  </a>
-</div>
     <p class="disclosure">
     Disclosure: The Shortlist may earn a commission when you buy through links on this site — this does not affect which products we choose to feature or how we rate them. See our full Affiliate Disclosure page for details.
   </p>
 </div>
 
+<div id="finderModal" aria-hidden="true"><div class="finder-modal-card"><h2>Find the right product</h2><p>Tell us what matters and we'll filter the current shortlist for you.</p><div class="finder-form"><label>What are you shopping for?<select id="finderCategory"><option value="">Any category</option><option value="tech">tech</option><option value="fashion">fashion</option><option value="home">home</option><option value="auto">auto</option><option value="beauty">beauty</option></select></label><label>Budget<select id="finderBudget"><option value="">Any budget</option><option value="low">Under Rs. 1,500</option><option value="mid">Rs. 1,500–5,000</option><option value="high">Above Rs. 5,000</option></select></label><label>What matters most?<select id="finderNeed"><option>Best overall</option><option>Lowest price</option><option>Everyday use</option><option>Gift / style</option></select></label></div><div class="finder-actions"><button onclick="closeFinder()">Cancel</button><button class="primary" onclick="runFinder()">Show My Picks →</button></div></div></div>
 <footer>
   <div class="wrap">
     <span>© 2026 The Shortlist</span>
@@ -1557,8 +1408,8 @@ function filterProducts(){
   var input = document.getElementById('siteSearch').value.toLowerCase();
   var cards = document.querySelectorAll('.pick-card');
   cards.forEach(function(card){
-    var title = card.querySelector('h3').textContent.toLowerCase();
-    card.style.display = title.includes(input) ? '' : 'none';
+    var text = card.textContent.toLowerCase();
+    card.style.display = text.includes(input) ? '' : 'none';
   });
 }
   var currentPage = 0;
@@ -1581,12 +1432,6 @@ function changePage(dir){
 }
 
 showPage();
-  window.addEventListener('load', function(){
-  setTimeout(function(){
-    document.getElementById('curtainLeft').classList.add('open');
-    document.getElementById('curtainRight').classList.add('open');
-  }, 600);
-});
   var faq = [
   { keywords: ["delivery", "shipping", "how long", "arrive"], reply: "Delivery usually takes 4-5 days after your order is confirmed." },
   { keywords: ["return", "refund", "exchange"], reply: "Returns and refunds follow the seller's policy (AliExpress or Amazon), since we link out to their store for the actual purchase." },
@@ -1630,63 +1475,39 @@ function sendChat(){
 }
 </script>
   <script>
-document.querySelectorAll('.pick-footer .price').forEach(function(priceEl){
-  var timerDiv = document.createElement('div');
-  timerDiv.className = 'deal-timer';
-  timerDiv.innerHTML = 'Deal ends in <span class="timer-val">--:--:--</span>';
-  priceEl.insertAdjacentElement('afterend', timerDiv);
-});
-
-function updateTimers(){
-  var now = new Date();
-  var midnight = new Date(now);
-  midnight.setHours(24,0,0,0);
-  var diff = midnight - now;
-  var h = Math.floor(diff / 3600000);
-  var m = Math.floor((diff % 3600000) / 60000);
-  var s = Math.floor((diff % 60000) / 1000);
-  var text = h + 'h ' + (m<10?'0':'') + m + 'm ' + (s<10?'0':'') + s + 's';
-  document.querySelectorAll('.timer-val').forEach(function(el){ el.textContent = text; });
-}
-updateTimers();
-setInterval(updateTimers, 1000);
 </script>
-  <div class="butterfly">
-  <svg viewBox="0 0 46 46" xmlns="http://www.w3.org/2000/svg">
-    <ellipse cx="23" cy="23" rx="1.6" ry="12" fill="#3A2E1F"/>
-    <g class="wing"><path d="M23 23 C10 8, -2 10, 4 24 C 8 30, 18 28, 23 23 Z" fill="#B9862F" opacity="0.92"/><path d="M23 23 C13 26, 6 34, 13 40 C 18 40, 22 32, 23 23 Z" fill="#33635A" opacity="0.85"/></g>
-    <g class="wing"><path d="M23 23 C36 8, 48 10, 42 24 C 38 30, 28 28, 23 23 Z" fill="#B9862F" opacity="0.92"/><path d="M23 23 C33 26, 40 34, 33 40 C 28 40, 24 32, 23 23 Z" fill="#33635A" opacity="0.85"/></g>
-  </svg>
-</div>
-  <script>
-document.querySelectorAll('.pick-card').forEach(function(card){
-  var name = card.querySelector('h3') ? card.querySelector('h3').textContent : '';
-  var price = card.querySelector('.price') ? card.querySelector('.price').textContent : '';
-  var link = card.querySelector('.cta-btn') ? card.querySelector('.cta-btn').href : '';
-  var footer = card.querySelector('.pick-footer');
-  if(!footer || !link) return;
-
-  var shareRow = document.createElement('div');
-  shareRow.className = 'share-row';
-
-  var waText = encodeURIComponent(name + ' — ' + price + '\n' + link);
-  var waBtn = document.createElement('a');
-  waBtn.className = 'share-btn share-whatsapp';
-  waBtn.href = 'https://wa.me/?text=' + waText;
-  waBtn.target = '_blank';
-  waBtn.innerHTML = 'WhatsApp';
-
-  var fbUrl = encodeURIComponent(link);
-  var fbBtn = document.createElement('a');
-  fbBtn.className = 'share-btn share-facebook';
-  fbBtn.href = 'https://www.facebook.com/sharer/sharer.php?u=' + fbUrl;
-  fbBtn.target = '_blank';
-  fbBtn.innerHTML = 'Facebook';
-
-  shareRow.appendChild(waBtn);
-  shareRow.appendChild(fbBtn);
-  footer.insertAdjacentElement('afterend', shareRow);
-});
+<script>
+(function(){
+  var STORAGE_KEY='shortlistSavedV2';
+  var compare=[];
+  function getSaved(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]')}catch(e){return[]}}
+  function saveSaved(items){localStorage.setItem(STORAGE_KEY,JSON.stringify(items))}
+  function cardData(card){return {name:(card.querySelector('h3')||{}).textContent||'',price:(card.querySelector('.price')||{}).textContent||'',img:(card.querySelector('img')||{}).src||'',link:(card.querySelector('.cta-btn')||{}).href||'',rank:(card.querySelector('.pick-rank')||{}).textContent||''}}
+  function renderShortlist(){
+    var box=document.getElementById('shortlistItems'), saved=getSaved(); if(!box)return; box.innerHTML='';
+    if(!saved.length){box.innerHTML='<div style="font-size:10px;color:var(--muted);padding:5px 0">Save products with ♡ and they will appear here.</div>';return}
+    saved.slice(0,3).forEach(function(p){var el=document.createElement('div');el.className='short-item';el.innerHTML='<img src="'+p.img+'" alt=""><div><b>'+p.name+'</b><span>'+p.price+'</span><em class="mini-label">'+p.rank+'</em></div><button class="mini-heart" aria-label="Remove">♥</button>';el.querySelector('button').onclick=function(){saveSaved(saved.filter(function(x){return x.name!==p.name}));initCards();renderShortlist()};box.appendChild(el)})
+  }
+  function initCards(){
+    var saved=getSaved(); document.querySelectorAll('.pick-card').forEach(function(card){
+      var d=cardData(card), save=card.querySelector('.save-product'), comp=card.querySelector('.compare-product');
+      if(!save){
+        save=document.createElement('button'); comp=document.createElement('button');
+        save.className='save-product'; save.title='Save to My Shortlist';
+        comp.className='compare-product'; comp.innerHTML='⇄'; comp.title='Add to compare';
+        save.onclick=function(){var list=getSaved();if(list.some(function(x){return x.name===d.name})){list=list.filter(function(x){return x.name!==d.name})}else{list.unshift(d);list=list.slice(0,8)}saveSaved(list);initCards();renderShortlist()};
+        comp.onclick=function(){var i=compare.findIndex(function(x){return x.name===d.name});if(i>=0){compare.splice(i,1);comp.classList.remove('selected')}else if(compare.length<4){compare.push(d);comp.classList.add('selected')}else{alert('You can compare up to 4 products.')}document.getElementById('compareCount').textContent=compare.length+' selected'};
+        card.appendChild(save);card.appendChild(comp);
+      }
+      var isSaved=saved.some(function(x){return x.name===d.name}); save.classList.toggle('saved',isSaved); save.innerHTML=isSaved?'♥':'♡';
+      comp.classList.toggle('selected',compare.some(function(x){return x.name===d.name}));
+    });
+  }
+  window.openFinder=function(){document.getElementById('finderModal').classList.add('open')};
+  window.closeFinder=function(){document.getElementById('finderModal').classList.remove('open')};
+  window.runFinder=function(){var cat=(document.getElementById('finderCategory').value||'').toLowerCase(),budget=document.getElementById('finderBudget').value, cards=[].slice.call(document.querySelectorAll('.pick-card'));cards.forEach(function(c){c.style.display=''});if(cat){cards.forEach(function(c){var t=(c.textContent+' '+(c.querySelector('img')||{}).alt).toLowerCase();if(!t.includes(cat)){c.style.display='none'}})}if(budget){cards.forEach(function(c){if(c.style.display==='none')return;var txt=(c.querySelector('.price')||{}).textContent||'', nums=txt.replace(/[^0-9.]/g,'');var n=parseFloat(nums);if(isNaN(n))return;var hide=(budget==='low'&&n>=1500)||(budget==='mid'&&(n<1500||n>5000))||(budget==='high'&&n<=5000);if(hide)c.style.display='none'})}closeFinder();document.getElementById('picks').scrollIntoView({behavior:'smooth',block:'start'})};
+  renderShortlist();initCards();
+})();
 </script>
 </body>
 </html>
