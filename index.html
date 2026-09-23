@@ -25,13 +25,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#F5F2EA;
-    --ink:#1E2A26;
-    --gold:#B9862F;
-    --teal:#33635A;
-    --line:#D9D2C0;
+    --paper:#F4F7FB;
+    --ink:#101828;
+    --gold:#2563EB;
+    --teal:#1D4ED8;
+    --line:#E2E8F0;
     --card:#FFFFFF;
-    --muted:#6B675C;
+    --muted:#64748B;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   body{
@@ -40,20 +40,32 @@
     font-family:'Inter', sans-serif;
     line-height:1.5;
   }
-  h1,h2,h3,.serif{ font-family:'Fraunces', serif; }
+  h1,h2,h3,.serif{ font-family:'Inter', sans-serif; font-weight:700; }
   a{ color:inherit; text-decoration:none; }
   .wrap{ max-width:1300px; margin:0 auto; padding:0 24px; }.pick-img{ width:100%; height:200px; object-fit:contain; border-radius:8px; margin-bottom:12px; display:block; background:#fff; }
 
   /* Header */
   header{
     border-bottom:1px solid var(--line);
-    padding:22px 0;
+    padding:16px 0 0;
+    background:#fff;
   }
-  header .wrap{ display:flex; justify-content:space-between; align-items:center; }
-  .logo{ font-size:22px; font-weight:600; letter-spacing:-0.01em; }
+  header .topbar{ display:flex; justify-content:space-between; align-items:center; gap:24px; padding-bottom:16px; }
+  .logo{ font-size:20px; font-weight:700; letter-spacing:-0.01em; white-space:nowrap; }
   .logo span{ color:var(--gold); }
+  .header-search{ flex:1; max-width:520px; display:flex; border:1px solid var(--line); border-radius:8px; overflow:hidden; }
+  .header-search input{ flex:1; border:none; padding:10px 14px; font-size:14px; outline:none; }
+  .header-search button{ background:var(--gold); color:#fff; border:none; padding:0 18px; cursor:pointer; }
+  .header-actions{ display:flex; gap:22px; font-size:12px; color:var(--muted); }
+  .header-actions a{ display:flex; flex-direction:column; align-items:center; gap:2px; white-space:nowrap; }
+  .header-actions a b{ display:block; color:var(--ink); font-size:13px; font-weight:600; }
+  .catbar{ display:flex; gap:22px; font-size:13.5px; color:var(--muted); padding:10px 0; border-top:1px solid var(--line); overflow-x:auto; }
+  .catbar a:hover{ color:var(--ink); }
   nav{ display:flex; gap:28px; font-size:14px; color:var(--muted); }
   nav a:hover{ color:var(--ink); }
+  @media (max-width:800px){
+    .header-search, .header-actions{ display:none; }
+  }
 
   /* Hero */
   .hero{ padding:64px 0 48px; border-bottom:1px solid var(--line); }
@@ -81,15 +93,19 @@
   .pick-card{
     background:var(--card);
     border:1px solid var(--line);
-    padding:22px;
+    border-radius:12px;
+    padding:20px;
     display:flex;
     flex-direction:column;
-    gap:12px;
+    gap:10px;
+    box-shadow:0 1px 2px rgba(16,24,40,0.04);
+    transition:box-shadow 0.15s, transform 0.15s;
   }
-  .pick-rank{ font-size:13px; color:var(--gold); font-weight:600; }
-  .pick-card h3{ font-size:19px; font-weight:600; }
-  .pick-card .why{ font-size:14px; color:var(--muted); flex-grow:1; }
-  .stars{ font-size:14px; color:var(--gold); letter-spacing:2px; }
+  .pick-card:hover{ box-shadow:0 8px 20px rgba(16,24,40,0.10); transform:translateY(-2px); }
+  .pick-rank{ display:inline-block; font-size:11.5px; color:#fff; background:var(--gold); font-weight:700; padding:3px 10px; border-radius:20px; width:fit-content; }
+  .pick-card h3{ font-size:17px; font-weight:700; }
+  .pick-card .why{ font-size:13.5px; color:var(--muted); flex-grow:1; }
+  .stars{ font-size:13px; color:#F59E0B; letter-spacing:2px; }
   .pick-footer{
     display:flex; justify-content:space-between; align-items:center;
     padding-top:10px; border-top:1px solid var(--line);
@@ -97,10 +113,10 @@
   .price{ font-weight:600; }
   .deal-timer{ font-size:11.5px; color:#c0392b; font-weight:600; margin-top:4px; }
   .cta-btn{
-    background:var(--teal); color:#fff; font-size:13px; font-weight:500;
-    padding:9px 16px; border:none; cursor:pointer;
+    background:var(--teal); color:#fff; font-size:13px; font-weight:600;
+    padding:9px 16px; border:none; border-radius:7px; cursor:pointer;
   }
-  .cta-btn:hover{ background:#274c45; }
+  .cta-btn:hover{ background:#1e40af; }
 
   /* Comparison table */
   .compare-table{ width:100%; border-collapse:collapse; font-size:14px; }
@@ -115,11 +131,12 @@
   }
 
   /* Categories */
-  .cats{ display:grid; grid-template-columns:repeat(4, 1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
-  .cat{ background:var(--card); padding:26px 22px;text-decoration:none; color:inherit; display:block; }
-  .cat h3{ font-size:17px; font-weight:600; margin-bottom:6px; }
-  .cat p{ font-size:13.5px; color:var(--muted); }
-.cat-icon{ width:40px; height:40px; margin-bottom:12px; stroke:var(--gold); }
+  .cats{ display:grid; grid-template-columns:repeat(4, 1fr); gap:14px; }
+  .cat{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:24px 20px; text-decoration:none; color:inherit; display:block; transition:box-shadow 0.15s, transform 0.15s; }
+  .cat:hover{ box-shadow:0 8px 20px rgba(16,24,40,0.08); transform:translateY(-2px); }
+  .cat h3{ font-size:16px; font-weight:700; margin-bottom:4px; }
+  .cat p{ font-size:13px; color:var(--muted); }
+.cat-icon{ width:36px; height:36px; margin-bottom:10px; stroke:var(--gold); }
   /* Disclosure */
   .disclosure{
     margin-top:64px; padding:20px 0; border-top:1px solid var(--line);
@@ -191,7 +208,10 @@
 .share-whatsapp{ background:#25D366; color:#fff; }
 .share-facebook{ background:#1877F2; color:#fff; }
 .share-btn:hover{ opacity:0.9; }
-  .new-hero{ background:linear-gradient(135deg, #1E2A26, #33635A); border-radius:12px; padding:48px 40px; margin:24px 0; color:#fff; }
+  .new-hero{ background:linear-gradient(135deg, #0F172A, #1D4ED8); border-radius:12px; padding:48px 40px; margin:24px 0; color:#fff; display:grid; grid-template-columns:1.4fr 1fr; gap:32px; align-items:center; }
+  .hero-visual{ display:flex; align-items:center; justify-content:center; }
+  .hero-visual svg{ width:100%; max-width:280px; height:auto; }
+  @media (max-width:900px){ .new-hero{ grid-template-columns:1fr; } .hero-visual{ display:none; } }
 .new-hero-badge{ display:inline-flex; align-items:center; gap:6px; background:rgba(255,255,255,0.15); padding:5px 12px; border-radius:20px; font-size:12px; font-weight:600; margin-bottom:16px; }
 .new-hero h1{ font-size:38px; color:#fff; max-width:520px; line-height:1.15; }
 .new-hero h1 .accent{ color:#B9862F; }
@@ -218,13 +238,27 @@
 <div id="curtainRight"><span class="curtain-text">to The Shortlist</span></div>
 
 <header>
-  <div class="wrap">
-    <div class="logo"><img src="logo.png" alt="The Shortlist" style="height:38px; display:block;"></div>
-    <nav>
-      <a href="#picks">This Week's Picks</a>
-      <a href="#compare">Compare</a>
-      <a href="#categories">Categories</a>
-    </nav>
+  <div class="wrap topbar">
+    <div class="logo"><img src="logo.png" alt="The Shortlist" style="height:34px; display:block;"></div>
+    <div class="header-search">
+      <input type="text" id="headerSearch" placeholder="Search products, categories, or ask a question..." onkeyup="document.getElementById('siteSearch').value=this.value; filterProducts();">
+      <button onclick="document.getElementById('picks').scrollIntoView({behavior:'smooth'})">🔍</button>
+    </div>
+    <div class="header-actions">
+      <a href="#categories"><b>Product Finder</b>Browse by category</a>
+      <a href="#picks"><b>This Week's Picks</b>Top picks</a>
+      <a href="#compare"><b>Compare</b>Head-to-head</a>
+    </div>
+  </div>
+  <div class="wrap catbar">
+    <a href="home-kitchen.html">🏠 Home &amp; Kitchen</a>
+    <a href="tech-gadgets.html">💻 Tech &amp; Gadgets</a>
+    <a href="auto-accessories.html">🚗 Auto Accessories</a>
+    <a href="fashion-jewelry.html">💎 Fashion &amp; Jewelry</a>
+    <a href="kids-family.html">🧒 Kids &amp; Family</a>
+    <a href="beauty-personal-care.html">✨ Beauty &amp; Personal Care</a>
+    <a href="security-safety.html">🛡️ Security &amp; Safety</a>
+    <a href="outdoor-sports.html">🏕️ Outdoor &amp; Sports</a>
   </div>
 </header>
 <section>
@@ -242,6 +276,16 @@
         <span>smart watch</span>
         <span>car accessories</span>
       </div>
+    <div class="hero-visual">
+      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="100" cy="100" r="95" fill="rgba(255,255,255,0.08)"/>
+        <rect x="45" y="70" width="110" height="70" rx="8" fill="rgba(255,255,255,0.18)"/>
+        <rect x="55" y="80" width="90" height="50" rx="4" fill="rgba(255,255,255,0.35)"/>
+        <circle cx="150" cy="55" r="22" fill="rgba(255,255,255,0.22)"/>
+        <path d="M138 55 a12 12 0 1 1 24 0 a12 12 0 1 1 -24 0" stroke="#fff" stroke-width="3" fill="none"/>
+        <rect x="30" y="140" width="35" height="35" rx="6" fill="rgba(255,255,255,0.22)"/>
+      </svg>
+    </div>
     </div>
 
     <div class="trust-bar">
@@ -250,6 +294,28 @@
       <div class="trust-item"><b>Trusted Reviews</b>Real buyer feedback</div>
       <div class="trust-item"><b>Updated Regularly</b>Fresh picks weekly</div>
       <div class="trust-item"><b>Affiliate Disclosure</b>We may earn a commission</div>
+    </div>
+
+    <div class="section-head">
+      <h2>Popular Categories</h2>
+    </div>
+    <div class="cats">
+      <a href="home-kitchen.html" class="cat">
+        <svg class="cat-icon" viewBox="0 0 48 48" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20 L24 6 L44 20"/><path d="M10 18 V42 H38 V18"/><path d="M18 42 V30 H30 V42"/></svg>
+        <h3>Home &amp; Kitchen</h3><p>Everyday gear worth the counter space.</p>
+      </a>
+      <a href="tech-gadgets.html" class="cat">
+        <svg class="cat-icon" viewBox="0 0 48 48" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="40" height="28" rx="3"/><path d="M16 42 H32"/><path d="M24 34 V42"/><rect x="14" y="14" width="20" height="12" rx="1"/></svg>
+        <h3>Tech &amp; Gadgets</h3><p>What's actually useful, not just new.</p>
+      </a>
+      <a href="auto-accessories.html" class="cat">
+        <svg class="cat-icon" viewBox="0 0 48 48" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 28 L11 14 H37 L42 28"/><rect x="3" y="28" width="42" height="12" rx="3"/><circle cx="13" cy="42" r="4"/><circle cx="35" cy="42" r="4"/></svg>
+        <h3>Auto Accessories</h3><p>Upgrades and essentials for your car.</p>
+      </a>
+      <a href="fashion-jewelry.html" class="cat">
+        <svg class="cat-icon" viewBox="0 0 48 48" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8 H36 L44 20 L24 44 L4 20 Z"/><path d="M4 20 H44"/><path d="M18 8 L24 20 L30 8"/></svg>
+        <h3>Fashion &amp; Jewelry</h3><p>Style picks that don't feel disposable.</p>
+      </a>
     </div>
   </div>
 </section>
