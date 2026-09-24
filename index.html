@@ -95,17 +95,13 @@ header{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.96);backd
 .quick-links{display:grid;grid-template-columns:1fr 1fr;gap:8px}.quick-links a{border:1px solid var(--line);border-radius:8px;padding:9px;font-size:10px;background:#fff}.quick-links a b{display:block;font-size:10px}.quick-links a span{color:var(--muted);font-size:8px}
 
 /* Sections */
-.main-content{padding-top:10px}.content-grid{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:18px;align-items:start}.primary-column{min-width:0}
+.main-content{padding-top:10px}.content-grid{display:grid;grid-template-columns:330px minmax(0,1fr);gap:18px;align-items:start;width:100%;}.content-grid > .side-stack{grid-column:1;grid-row:1;position:sticky;top:12px;align-self:start;min-width:0;height:auto;max-height:none;overflow:visible;padding-right:3px;}.content-grid > .primary-column{grid-column:2;grid-row:1;min-width:0;width:100%;height:calc(100vh - 170px);overflow-y:auto;overflow-x:hidden;padding-right:4px;}.primary-column{min-width:0;min-height:0;}
+@media(max-width:900px){.content-grid{grid-template-columns:1fr}.content-grid > .side-stack{grid-column:1;grid-row:2;position:static;height:auto;overflow:visible}.content-grid > .primary-column{grid-column:1;grid-row:1;height:auto;overflow:visible}.picks{max-height:none;overflow:visible;grid-template-columns:repeat(2,minmax(0,1fr))}}
 .section-head{display:flex;justify-content:space-between;align-items:end;margin:22px 0 12px}.section-head h2{font-size:20px;letter-spacing:-.25px}.section-head .count{font-size:10px;color:var(--muted)}
-/* Product row: ONLY this area scrolls horizontally */
-.picks{
-  display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:12px;
-  width:100%;
-  overflow:visible;
-  padding:3px 2px 12px;
-}
+/* Desktop layout: LEFT sidebar stays in place, RIGHT products scroll independently */
+@media(min-width:901px){.content-grid{grid-template-columns:330px minmax(0,1fr)!important}.content-grid > .side-stack{grid-column:1!important;grid-row:1!important}.content-grid > .primary-column{grid-column:2!important;grid-row:1!important}.picks{grid-template-columns:repeat(4,minmax(0,1fr))!important}}
+/* Product area: right side is independently scrollable; 4 cards per row */
+.picks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;align-content:start;padding:3px 2px 12px;overflow:visible;}
 .pick-card{position:relative;min-width:0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:6px;box-shadow:0 2px 8px rgba(16,33,58,.03);transition:.18s ease;min-width:0}.pick-card:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(16,33,58,.10)}
 .pick-img{width:100%;height:150px;object-fit:contain;border-radius:9px;background:#f7f9fc;display:block;margin-bottom:2px}.pick-rank{display:inline-block;width:max-content;font-size:8px;color:#fff;background:var(--blue);font-weight:800;padding:4px 7px;border-radius:6px}.pick-card h3{font-size:11px;line-height:1.3;font-weight:750;min-height:29px}.pick-card .why{font-size:9px;color:var(--muted);line-height:1.4;min-height:38px}.stars{font-size:10px;color:#f2a900;letter-spacing:1px}.pick-footer{display:flex;justify-content:space-between;align-items:center;padding-top:6px;border-top:1px solid var(--line);margin-top:auto;gap:6px}.price{font-weight:800;font-size:12px}.deal-timer{font-size:8px;color:#e05b4f;font-weight:700;margin-top:0}.cta-btn{display:inline-flex;align-items:center;justify-content:center;background:#fff;color:var(--blue);border:1px solid #9fc1f3;font-size:9px;font-weight:800;padding:7px 9px;border-radius:6px;cursor:pointer}.cta-btn:hover{background:#eef6ff}.share-row{display:none}
 .save-product,.compare-product{position:absolute;top:9px;width:27px;height:27px;border-radius:50%;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:3}.save-product{right:9px;color:#7b8797}.compare-product{right:41px;color:#7b8797;font-size:11px}.save-product.saved{color:#e53958;background:#fff0f3}.compare-product.selected{color:var(--blue);background:#eef6ff;border-color:#9fc1f3}
@@ -132,10 +128,64 @@ footer{margin-top:34px;background:#0d2038;color:#d9e2ee;padding:24px 0;font-size
 /* Remove older decorative effects from the original version */
 #curtainLeft,#curtainRight,.butterfly{display:none!important}.new-hero-search + .popular-tags{position:relative}
 
-@media(max-width:1200px){.topbar{grid-template-columns:220px 1fr 310px}.header-actions{gap:8px}.content-grid{grid-template-columns:1fr 300px}.picks{grid-template-columns:repeat(3,minmax(0,1fr))}.category-strip{grid-template-columns:repeat(4,1fr)}}
-@media(max-width:900px){.wrap{padding:0 16px}.topbar{grid-template-columns:170px 1fr;gap:14px}.header-actions{display:none}.logo img{width:160px}.hero-layout,.content-grid{grid-template-columns:1fr}.side-stack{display:grid;grid-template-columns:1fr 1fr}.finder-card{grid-column:1/-1}.hero-visual{opacity:.35;width:65%}.picks{grid-template-columns:repeat(2,minmax(0,1fr))}.category-strip{grid-template-columns:repeat(4,1fr)}.catbar{gap:18px}}
-@media(max-width:620px){.wrap{padding:0 12px}.topbar{grid-template-columns:1fr}.header-search{display:none}.catbar{height:39px;font-size:10px}.new-hero{min-height:380px;padding:28px 22px}.new-hero h1{font-size:31px}.hero-visual{display:none}.picks{grid-template-columns:1fr 1fr;gap:8px}.pick-img{height:120px}.pick-card{padding:8px;flex-basis:190px}.pick-card h3{font-size:10px}.pick-card .why{font-size:8px}.category-strip{grid-template-columns:repeat(2,1fr)}.side-stack{grid-template-columns:1fr}.finder-card{grid-column:auto}.section-head{margin-top:18px}.section-head h2{font-size:18px}.compare-table{display:block;overflow-x:auto;white-space:nowrap}.product-marquee-container{display:none}footer .wrap{flex-direction:column;align-items:flex-start}}
+@media(max-width:1200px){.topbar{grid-template-columns:220px 1fr 310px}.header-actions{gap:8px}.content-grid{grid-template-columns:300px minmax(0,1fr)}.picks{grid-template-columns:repeat(4,minmax(0,1fr))}.category-strip{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:900px){.wrap{padding:0 16px}.topbar{grid-template-columns:170px 1fr;gap:14px}.header-actions{display:none}.logo img{width:160px}.hero-layout,.content-grid{grid-template-columns:1fr}.content-grid > .side-stack,.content-grid > .primary-column{grid-column:1;grid-row:auto}.content-grid > .side-stack{position:static;height:auto;overflow:visible}.content-grid > .primary-column{height:auto;overflow:visible}.side-stack{display:grid;grid-template-columns:1fr 1fr}.finder-card{grid-column:1/-1}.hero-visual{opacity:.35;width:65%}.picks{grid-template-columns:repeat(2,minmax(0,1fr));max-height:none;overflow:visible}.category-strip{grid-template-columns:repeat(4,1fr)}.catbar{gap:18px}}
+@media(max-width:620px){.wrap{padding:0 12px}.topbar{grid-template-columns:1fr}.header-search{display:none}.catbar{height:39px;font-size:10px}.new-hero{min-height:380px;padding:28px 22px}.new-hero h1{font-size:31px}.hero-visual{display:none}.picks{grid-template-columns:1fr 1fr;gap:8px}.pick-img{height:120px}.pick-card{padding:8px;flex-basis:auto}.pick-card h3{font-size:10px}.pick-card .why{font-size:8px}.category-strip{grid-template-columns:repeat(2,1fr)}.side-stack{grid-template-columns:1fr}.finder-card{grid-column:auto}.section-head{margin-top:18px}.section-head h2{font-size:18px}.compare-table{display:block;overflow-x:auto;white-space:nowrap}.product-marquee-container{display:none}footer .wrap{flex-direction:column;align-items:flex-start}}
 </style>
+
+<style id="layout-reference-fix">
+/* Reference layout: main products LEFT, utility sidebar RIGHT */
+@media (min-width: 901px){
+  .content-grid{
+    grid-template-columns:minmax(0,1fr) 360px !important;
+    gap:18px !important;
+    align-items:start !important;
+  }
+  .content-grid > .primary-column{
+    grid-column:1 !important;
+    grid-row:1 !important;
+    width:100% !important;
+    height:auto !important;
+    max-height:none !important;
+    overflow:visible !important;
+    padding-right:0 !important;
+    min-width:0 !important;
+  }
+  .content-grid > .side-stack{
+    grid-column:2 !important;
+    grid-row:1 !important;
+    position:sticky !important;
+    top:12px !important;
+    height:auto !important;
+    max-height:calc(100vh - 24px) !important;
+    overflow:visible !important;
+    padding-right:0 !important;
+    min-width:0 !important;
+  }
+  .picks{
+    display:grid !important;
+    grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+    gap:12px !important;
+    overflow:visible !important;
+    padding:3px 0 12px !important;
+  }
+  .pick-card{
+    min-width:0 !important;
+    width:auto !important;
+    flex:none !important;
+  }
+  .pick-img{height:150px !important;}
+}
+@media (min-width:1201px){
+  .content-grid{grid-template-columns:minmax(0,1fr) 365px !important;}
+}
+@media (max-width:900px){
+  .content-grid{grid-template-columns:1fr !important;}
+  .content-grid > .primary-column{grid-column:1 !important;grid-row:1 !important;height:auto !important;overflow:visible !important;}
+  .content-grid > .side-stack{grid-column:1 !important;grid-row:2 !important;position:static !important;}
+}
+</style>
+
 </head>
 <body>
   <div id="curtainLeft"><span class="curtain-text">Welcome</span></div>
@@ -176,14 +226,7 @@ footer{margin-top:34px;background:#0d2038;color:#d9e2ee;padding:24px 0;font-size
         <div class="hero-product three"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S417262a33df144789b49236a5aedfe192.jpg_220x220q75.jpg_.avif" alt=""><small>Smart Tech</small></div>
       </div>
     </div>
-    <aside class="side-stack" id="finder">
-      <div class="side-card finder-card"><h3>Not sure what to buy?</h3><p>Answer a few quick questions and get your personalized shortlist.</p><button class="side-btn" onclick="openFinder()">Start Product Finder&nbsp; →</button></div>
-      <div class="side-card" id="shortlist"><div class="side-title"><h3>Your Shortlist</h3><a href="#shortlist">View all →</a></div><div class="shortlist-items" id="shortlistItems"></div></div>
-      <div class="side-card"><div class="side-title"><h3>Compare Products</h3></div><p>Compare 2–4 products side by side.</p><div class="side-action" style="margin-top:10px"><span id="compareCount" style="font-size:10px;color:var(--muted)">0 selected</span><a href="#compare" class="side-btn">Compare Now&nbsp; ↗</a></div></div>
-      <div class="side-card"><div class="side-title"><h3>Price Alert</h3></div><p>Track price drops and get notified.</p><div class="side-action" style="margin-top:10px"><span style="font-size:10px;color:var(--muted)">Free alerts</span><button class="side-btn" onclick="alert('Price alerts are ready for the next update.')">Set Alert&nbsp; ♧</button></div></div>
-      <div class="side-card newsletter"><div class="side-title"><h3>Newsletter</h3></div><p>Get the latest picks, deals and guides.</p><input type="email" placeholder="Enter your email address"><button class="side-btn">Subscribe&nbsp; →</button></div>
-      <div class="side-card"><div class="side-title"><h3>Quick Links</h3></div><div class="quick-links"><a href="about.html"><b>♡ &nbsp;About Us</b><span>Our story</span></a><a href="privacy.html"><b>♧ &nbsp;FAQ</b><span>Need help?</span></a><a href="contact.html"><b>◉ &nbsp;Contact</b><span>Get in touch</span></a><a href="#compare"><b>▤ &nbsp;Blog</b><span>Guides & more</span></a></div></div>
-    </aside>
+
   </div>
 </section>
 
@@ -227,6 +270,14 @@ footer{margin-top:34px;background:#0d2038;color:#d9e2ee;padding:24px 0;font-size
 </div>
 <div class="wrap main-content">
   <div class="content-grid">
+    <aside class="side-stack" id="finder">
+      <div class="side-card finder-card"><h3>Not sure what to buy?</h3><p>Answer a few quick questions and get your personalized shortlist.</p><button class="side-btn" onclick="openFinder()">Start Product Finder&nbsp; →</button></div>
+      <div class="side-card" id="shortlist"><div class="side-title"><h3>Your Shortlist</h3><a href="#shortlist">View all →</a></div><div class="shortlist-items" id="shortlistItems"></div></div>
+      <div class="side-card"><div class="side-title"><h3>Compare Products</h3></div><p>Compare 2–4 products side by side.</p><div class="side-action" style="margin-top:10px"><span id="compareCount" style="font-size:10px;color:var(--muted)">0 selected</span><a href="#compare" class="side-btn">Compare Now&nbsp; ↗</a></div></div>
+      <div class="side-card"><div class="side-title"><h3>Price Alert</h3></div><p>Track price drops and get notified.</p><div class="side-action" style="margin-top:10px"><span style="font-size:10px;color:var(--muted)">Free alerts</span><button class="side-btn" onclick="alert('Price alerts are ready for the next update.')">Set Alert&nbsp; ♧</button></div></div>
+      <div class="side-card newsletter"><div class="side-title"><h3>Newsletter</h3></div><p>Get the latest picks, deals and guides.</p><input type="email" placeholder="Enter your email address"><button class="side-btn">Subscribe&nbsp; →</button></div>
+      <div class="side-card"><div class="side-title"><h3>Quick Links</h3></div><div class="quick-links"><a href="about.html"><b>♡ &nbsp;About Us</b><span>Our story</span></a><a href="privacy.html"><b>♧ &nbsp;FAQ</b><span>Need help?</span></a><a href="contact.html"><b>◉ &nbsp;Contact</b><span>Get in touch</span></a><a href="#compare"><b>▤ &nbsp;Blog</b><span>Guides & more</span></a></div></div>
+    </aside>
     <div class="primary-column">
       <div class="section-head" id="picks"><h2>Today's Shortlists</h2><div class="count">Top picks, best deals and trending products — all in one place.</div></div>
   <div class="picks">
